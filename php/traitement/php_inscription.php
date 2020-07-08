@@ -18,6 +18,7 @@
                             if(filter_var($email, FILTER_VALIDATE_EMAIL))//Vérifie que l'email est bien au format mail
                                 {                                                                      
                                     $user->register($login, $password, $email);//Insert l'utilisateur dans la BDD                                                            
+                                    header("Location:connexion.php");
                                 }      
                             else
                                 {
