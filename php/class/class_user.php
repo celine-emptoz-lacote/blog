@@ -1,16 +1,11 @@
 <?php
     class user 
         {
-            //Création des attributs de la classe user
-            private $id ='';
-            public $login = '';
-            public $password = '';
-            public $email = '';
-            public $id_droit = '';
+//----------Création des attributs de la classe user           
             public $bdd = '';
             public $msg_error = '';
 
-            //Crée la connexion à la bdd dès que l'objet est appelé "new user"
+//----------Crée la connexion à la bdd dès que l'objet est appelé "new user"
             public function __construct($dbname)
                 {
                     try
@@ -24,12 +19,14 @@
                             echo $error;
                         }                    
                 }
-            //Ferme la connexion à la bbd
+
+//----------Ferme la connexion à la bbd
             public function __destruct()
                 {
                     $this->bdd = '';
                 }
-            //Vérifie que le login n'est pas prit
+
+//----------Vérifie que le login n'est pas prit
             public function issetUser($login)
                 {
                     $query_issset_user = $this->bdd->query("SELECT * FROM utilisateurs WHERE login='$login'");
@@ -37,7 +34,8 @@
 
                     return $isset_user;
                 }
-            //Insert dans la bdd les info de l'utilisateur
+
+//----------Insert dans la bdd les info de l'utilisateur
             public function register($login, $password, $email)
                 {                    
                     $insert_user = $this->bdd->prepare("INSERT INTO utilisateurs (login, password, email) VALUES (:login, :password, :email)");
@@ -47,7 +45,8 @@
                         'email' => $email
                     ]);                                                   
                 }      
-            //Créée une session["user"] => connecte l'utilisateur
+
+//----------Créée une session["user"] => connecte l'utilisateur
             public function connect($login, $password)     
                 {                                                
                             if(!empty($this->issetUser($login)))
@@ -63,8 +62,11 @@
                             else
                                 $this->msg_error = "Ce login n'existe pas";
                 }
+
+//----------Met à jour les données de l'utilisateur
             public function updateUser($login, $old_password, $email, $id, $nw_password ='', $conf_password = '')
-                {                
+                {              
+                    //Met à jour le login de l'utilisateur  
                     if(empty($this->issetUser($login)) || $login == $_SESSION["user"]->login)
                         {
                             $update_login = $this->bdd->prepare("UPDATE utilisateurs SET login=? WHERE id=?");
@@ -79,6 +81,41 @@
                         {
                             $this->msg_error = "Ce login est déjà prit";
                         }
+                    //Met à jour l'email de l'utilisateur 
+                    if(empty($this->issetUser($email)) || $email == $_SESSION["user"]->email)
+                        {
+                            $update_email = $this->bdd->prepare("UPDATE utilisateurs SET email=? WHERE id=?");
+                            $update_email->execute([
+                                $email,
+                                $id
+                            ]);
+                            $_SESSION["user"]->email = $email;
+                            echo "modifié";
+                        }
+                    else
+                        {
+                            $this->msg_error = "Cet email existe déjà";
+                        }
+                    //Met à jour le password de l'utilisateur
+                    if(isset($nw_password) && !empty($nw_password))
+                        {
+                            if($nw_password == $conf_password)
+                                {
+                                    $hash_nw_password = password_hash($nw_password, PASSWORD_DEFAULT);
+
+                                    $update_password = $this->bdd->prepare("UPDATE utilisateurs SET password=? WHERE id=?");
+                                    $update_password->execute([
+                                        $hash_nw_password,
+                                        $id
+                                    ]);
+                                    $_SESSION["user"]->password = $hash_nw_password;
+                                    echo "modifié";
+                                }
+                            else
+                                {
+                                    $this->msg_error = "Les mots de passe ne correspondent pas";
+                                }
+                        }                    
                 }
         }    
 ?>

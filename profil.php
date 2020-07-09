@@ -13,7 +13,7 @@
             <label for="login">Login :</label>
             <input type="text" name="login" value="<?= $_SESSION['user']->login ?>" required>
 
-            <label for="old_password">Ancien mot de passe :</label>
+            <label for="old_password">Mot de passe actuel :</label>
             <input type="password" name="old_password" required>
 
             <label for="nw_password">Mot de passe :</label>
