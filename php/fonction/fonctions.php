@@ -7,7 +7,6 @@ function connexionPDO() {
         echo 'Échec de la connexion : ' . $e->getMessage();
         exit;
     }
-
     return $bd;
 } 
 
@@ -25,5 +24,6 @@ function recuperation_join($base,$table,$table2,$table_join1,$table_join2,$param
     $resultat = $requete->fetch();
     return $resultat;
 }
+
 
 ?>
