@@ -1,6 +1,5 @@
 <?php 
     include 'php/traitement/php_inscription.php';
-    require 'php/fonction/fonctions.php'; 
 ?>
 <!DOCTYPE html>
 <html>
