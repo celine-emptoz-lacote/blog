@@ -1,12 +1,14 @@
 <?php
     class user 
         {
+            //Création des attributs de la classe user
             private $id ='';
             public $login = '';
             public $password = '';
             public $email = '';
             public $id_droit = '';
             public $bdd = '';
+            public $msg_error = '';
 
             //Crée la connexion à la bdd dès que l'objet est appelé "new user"
             public function __construct($dbname)
@@ -44,6 +46,22 @@
                         'password' => $password,
                         'email' => $email
                     ]);                                                   
-                }           
+                }      
+            //Créée une session["user"] => connecte l'utilisateur
+            public function connect($login, $password)     
+                {                                                
+                            if(!empty($this->issetUser($login)))
+                                {
+                                    if(password_verify($password, $this->issetUser($login)->password))
+                                        {
+                                            $_SESSION["user"] = $this->issetUser($login);     
+                                            header("Location:index.php");                                       
+                                        }    
+                                    else
+                                        $this->msg_error = "Mauvais mot de passe";                                                                                                                                  
+                                }    
+                            else
+                                $this->msg_error = "Ce login n'existe pas";
+                }
         }    
 ?>
