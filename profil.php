@@ -1,6 +1,5 @@
 <?php 
-    include 'php/traitement/php_profil.php'; 
-    require 'php/fonction/fonctions.php';
+    include 'php/traitement/php_profil.php';     
 ?>
 <!DOCTYPE html>
 <html>
