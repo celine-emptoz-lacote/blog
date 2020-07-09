@@ -1,5 +1,5 @@
 <?php    
-    include 'php/class/fonction_inscription.php';
+    include 'php/class/class_user.php';
 
     session_start();
 
