@@ -63,5 +63,22 @@
                             else
                                 $this->msg_error = "Ce login n'existe pas";
                 }
+            public function updateUser($login, $old_password, $email, $id, $nw_password ='', $conf_password = '')
+                {                
+                    if(empty($this->issetUser($login)) || $login == $_SESSION["user"]->login)
+                        {
+                            $update_login = $this->bdd->prepare("UPDATE utilisateurs SET login=? WHERE id=?");
+                            $update_login->execute([
+                                $login,
+                                $id
+                            ]);
+                            $_SESSION["user"]->login = $login;
+                            echo "modifié";
+                        }
+                    else
+                        {
+                            $this->msg_error = "Ce login est déjà prit";
+                        }
+                }
         }    
 ?>
