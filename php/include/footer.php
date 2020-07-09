@@ -18,7 +18,7 @@
       </div>
 
 
-      <hr class="clearfix w-100 d-md-none">
+   
 
       <div class="col-md-2 mx-auto">
 
@@ -28,7 +28,7 @@
             <?php if (isset($categories)) :?>
                 <?php for ($i=0 ; $i<COUNT($categories); $i++) : ?>
                     <li>
-                        <a href="#!"><?= ucwords(strtolower($categories[$i]['nom'])) ?></a>
+                        <a href="#!" ><?= ucwords(strtolower($categories[$i]['nom'])) ?></a>
                     </li>
                 <?php endfor ;?>
             <?php endif ;?>
@@ -38,7 +38,7 @@
 
       </div>
 
-      <hr class="clearfix w-100 d-md-none ">
+      
 
       <div class="col-md-2 mx-auto">
 
@@ -47,26 +47,26 @@
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Connexion</a>
+            <a href="connexion.php" >Connexion</a>
           </li>
           <li>
-            <a href="#!">Inscription</a>
+            <a href="inscription.php" >Inscription</a>
           </li>
           <li>
-            <a href="#!">Mon compte</a>
+            <a href="profil.php" >Mon compte</a>
           </li>
         </ul>
 
       </div>
 
-      <hr class="clearfix w-100 d-md-none">
+
 
     </div>
 
   </div>
 
 <!-- SI PAS CONNECTER  -->
-<?php if (!isset($_SESSION['user'])) : ?>
+<?php if (!isset($_SESSION['user']->id)) : ?>
   <hr>
 
   <ul class="list-unstyled list-inline text-center py-2">
@@ -75,7 +75,7 @@
       <a href="inscription.php" class="btn btn-danger btn-rounded">S'enregistrer</a>
     </li>
   </ul>
-  <hr>
+ 
 <?php else : ?>
     <hr>
     <ul class="list-unstyled list-inline text-center py-2">
@@ -87,30 +87,15 @@
   <hr>
 <?php endif ;?>
   <ul class="list-unstyled list-inline text-center">
-    <li class="list-inline-item">
-      <a class="btn-floating btn-fb mx-1">
-        <i class="icon-facebook-circled"> </i>
-      </a>
+    <li class="list-inline-item"><a href="https://www.facebook.com/" class="btn-floating btn-fb mx-1"><i class="icon-facebook-circled"> </i></a>
     </li>
-    <li class="list-inline-item">
-      <a class="btn-floating btn-tw mx-1">
-        <i class="icon-twitter-circled"> </i>
-      </a>
+    <li class="list-inline-item"><a href="https://twitter.com/explore" class="btn-floating btn-tw mx-1"><i class="icon-twitter-circled"> </i></a>
     </li>
-    <li class="list-inline-item">
-      <a class="btn-floating btn-gplus mx-1">
-        <i class="icon-linkedin-circled"> </i>
-      </a>
+    <li class="list-inline-item"><a href="https://fr.linkedin.com/" class="btn-floating btn-gplus mx-1"><i class="icon-linkedin-circled"> </i></a>
     </li>
-    <li class="list-inline-item">
-      <a class="btn-floating btn-li mx-1">
-        <i class="icon-google-plus-circle"> </i>
-      </a>
+    <li class="list-inline-item"><a href="https://myaccount.google.com/" class="btn-floating btn-li mx-1"><i class="icon-google-plus-circle"> </i></a>
     </li>
-    <li class="list-inline-item">
-      <a class="btn-floating btn-dribbble mx-1">
-        <i class="icon-dribbble-circled"> </i>
-      </a>
+    <li class="list-inline-item"><a href="https://dribbble.com/" class="btn-floating btn-dribbble mx-1"><i class="icon-dribbble-circled"> </i></a>
     </li>
   </ul>
 
