@@ -1,5 +1,5 @@
 <?php 
-    include 'php/traitement/php_profil.php';     
+    include 'php/traitement/php_profil.php';   
 ?>
 <!DOCTYPE html>
 <html>
