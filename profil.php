@@ -17,48 +17,58 @@
 <body>
     <header><?php include 'php/include/header.php';?></header>
 
-    <main>
-        <form action="" method="POST">
-            <label for="login">Login :</label>
-            <input type="text" name="login" value="<?= $_SESSION['user']->login ?>" required>
+    <main>    
+        <section class="container mb-5 mt-5 d-flex justify-content-center">
+            <form action="" method="POST">            
+                <section class="form-group">
+                    <label for="login" class="d-flex justify-content-center">Login :</label>
+                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="login" value="<?= $_SESSION["user"]->login ?>" required>            
+                </section>
+                <section class="form-group">
+                    <label for="email" class="d-flex justify-content-center">Email :</label>
+                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="<?= $_SESSION["user"]->email ?>" required>            
+                </section>
+                <section class="form-group">
+                    <label for="old_password" class="d-flex justify-content-center">Mot de passe actuel :</label>
+                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="old_password" required>            
+                </section>
+                <section class="form-group">
+                    <label for="nw_password" class="d-flex justify-content-center">Nouveau mot de passe :</label>
+                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="nw_password">            
+                </section>
+                <section class="form-group">
+                    <label for="conf_password" class="d-flex justify-content-center">Confirmer mot de passe :</label>
+                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="conf_password">            
+                </section>            
+                <section class="d-flex justify-content-center">
+                    <input type="submit" name="valid_modif" value="Modifier" class="btn btn-primary ">
+                </section>
+                
 
-            <label for="old_password">Mot de passe actuel :</label>
-            <input type="password" name="old_password" required>
-
-            <label for="nw_password">Mot de passe :</label>
-            <input type="password" name="nw_password">
-
-            <label for="conf_password">Confirmer mot de passe :</label>
-            <input type="password" name="conf_password">
-
-            <label for="email">email :</label>
-            <input type="email" name="email" value="<?=$_SESSION['user']->email ?>" required>
-
-            <input type="submit" name="valid_modif" value="Modifier">
-
-            <?php
-                if(!empty($user->msg_error))
-                    {
-            ?>
-                        <p class="msg_error">
-            <?php
-                        echo $user->msg_error;
-            ?>
-                        </p>
-            <?php
-                    }                   
-                if(!empty($user->msg_valid))
-                    {
-            ?>
-                        <p class="msg_error">
-            <?php
-                        echo $user->msg_valid;
-            ?>
-                        </p>
-            <?php
-                    }
-            ?>            
-        </form>
+                <?php
+                    if(!empty($user->msg_error))
+                        {
+                ?>
+                            <p class="msg_error">
+                <?php
+                            echo $user->msg_error;
+                ?>
+                            </p>
+                <?php
+                        }                   
+                    if(!empty($user->msg_valid))
+                        {
+                ?>
+                            <p class="msg_error">
+                <?php
+                            echo $user->msg_valid;
+                ?>
+                            </p>
+                <?php
+                        }
+                ?>            
+            </form>
+        </section>
     </main>
 
     <?php include 'php/include/footer.php';?>
