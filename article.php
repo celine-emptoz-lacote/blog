@@ -6,18 +6,18 @@
     setlocale(LC_TIME, "fr_FR","French");
 
     $bd = connexionPDO();
-
-    // $requete = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id WHERE articles.id = $id_article" );
-    // $requete->execute();
-    // $resultat = $requete->fetchall();
     $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
     var_dump( $resultat);
 
-    $requete_commentaires = $bd->prepare("SELECT * FROM commentaires WHERE id_article = $id_article");
-    $requete_commentaires->execute();
-    $resultat_commenatires = $requete_commentaires->fetchall();
+    //$resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateurs','utilisateurs.id','id_article',$id_article);
+     $requete_commentaires = $bd->prepare("SELECT * FROM commentaires WHERE id_article = $id_article");
+     $requete_commentaires->execute();
+     $resultat_commentaires = $requete_commentaires->fetchall();
 
-    var_dump($resultat_commenatires);
+    var_dump($resultat_commentaires);
+    $resultat_user = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','commentaires.id_article',$id_article);
+    
+    var_dump($resultat_user);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,7 +30,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="src/fontello/css/fontello.css" rel="stylesheet">
     <link href="src/css/styles.css" rel="stylesheet">
-    <title>Document</title>
+    <title><?= $resultat['titre'] ?></title>
 </head>
 <body>
 
@@ -43,21 +43,24 @@
 
 
 <!-- SI IL Y A DES COMM-->
-    <?php if (!empty($resultat_commenatires)) :?>
-    <div class="card">
-        <div class="card-header">
+    <?php if (!empty($resultat_commentaires)) :?>
+    
+        <div>
         <!-- COMPTER LES COMS-->
-            <h3>Commentaires</h3>
+            <h3><?= COUNT($resultat_commentaires) ?> Commentaire(s)</h3>
         </div>
         <div> 
-        <p>com</p>  
-        
+            <?php for ($i = 0 ; $i<COUNT($resultat_commentaires) ; $i++) :?>
+                <p><?= $resultat_commentaires[$i]['commentaire'] ?></p> 
+                <p>Par : <b><?= ucfirst($resultat_user['login']) ?></b> , le <?=strftime("%d %B %Y",strtotime($resultat_user['date'])) ?></p> 
+            <?php endfor ;?>
         </div>
-    </div> 
+    
     <?php endif ;?>
 
-   
-        <form action="php/traitement/formulaire_commentaires.php?<?= $id_article ?>" method="POST">
+        <!-- SI UTILISATEUR CONNECTER  -->
+        <?php if($_SESSIONS['user']->id) :?>
+        <form action="php/traitement/formulaire_commentaires.php?id=<?= $id_article ?>" method="POST">
 
             <label for="commenataire">Votre commentaire :</label>
             <textarea name="commentaire" id="commentaire" cols="30" rows="10"></textarea>
@@ -65,7 +68,7 @@
             <input type="submit" name="valider">
         
         </form>
-    
+        <?php endif ;?>
     </main>
 
     <?php include 'php/include/footer.php' ?>

@@ -17,7 +17,7 @@ $categories = recuperation($bd,'nom','categories');
       </li>
 
     <!-- SI L UTILISATEUR CONNECTE -->
-    <?php if (isset($_SESSION['id'])) :?>
+    <?php if (isset($_SESSION['user']->id)) :?>
         <li class="nav-item active">
             <a class="nav-link" href="profil.php">Profil</a>
         </li>
@@ -26,13 +26,13 @@ $categories = recuperation($bd,'nom','categories');
         </li>
 
         <!-- SI MODERATEUR OU ADMIN  -->
-        <?php if( $_SESSION['id_droits'] == 42 || $_SESSION['id_droits'] == 1337 ) :?>
+        <?php if( $_SESSION['user']->id_droits == 42 || $_SESSION['user']->id_droits == 1337 ) :?>
             <li class="nav-item active">
                 <a class="nav-link" href="creer-article.php">Creer un article</a>
             </li>
         <?php endif ?>
 
-        <?php if( $_SESSION['id_droits'] == 1337 ) :?>
+        <?php if( $_SESSION['user']->id_droits == 1337 ) :?>
             <li class="nav-item active">
                 <a class="nav-link" href="admin.php">Espace administateur</a>
             </li>
