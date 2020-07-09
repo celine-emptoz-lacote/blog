@@ -3,7 +3,10 @@
         {
 //----------Création des attributs de la classe user           
             public $bdd = '';
+            public $login = '';
+            public $email = '';
             public $msg_error = '';
+            public $msg_valid = '';
 
 //----------Crée la connexion à la bdd dès que l'objet est appelé "new user"
             public function __construct($dbname)
@@ -64,38 +67,26 @@
                 }
 
 //----------Met à jour les données de l'utilisateur
-            public function updateUser($login, $old_password, $email, $id, $nw_password ='', $conf_password = '')
+            public function updateUser($login, $email, $id, $nw_password ='', $conf_password = '')
                 {              
-                    //Met à jour le login de l'utilisateur  
+                    //Met à jour l'attribut login de la classe
                     if(empty($this->issetUser($login)) || $login == $_SESSION["user"]->login)
                         {
-                            $update_login = $this->bdd->prepare("UPDATE utilisateurs SET login=? WHERE id=?");
-                            $update_login->execute([
-                                $login,
-                                $id
-                            ]);
-                            $_SESSION["user"]->login = $login;
-                            echo "modifié";
+                            $this->login = $login;                           
                         }
                     else
                         {
                             $this->msg_error = "Ce login est déjà prit";
                         }
-                    //Met à jour l'email de l'utilisateur 
+                    //Met à jour l'attribut email de la classe
                     if(empty($this->issetUser($email)) || $email == $_SESSION["user"]->email)
-                        {
-                            $update_email = $this->bdd->prepare("UPDATE utilisateurs SET email=? WHERE id=?");
-                            $update_email->execute([
-                                $email,
-                                $id
-                            ]);
-                            $_SESSION["user"]->email = $email;
-                            echo "modifié";
+                        {                           
+                            $this->email = $email;                         
                         }
                     else
                         {
                             $this->msg_error = "Cet email existe déjà";
-                        }
+                        }                    
                     //Met à jour le password de l'utilisateur
                     if(isset($nw_password) && !empty($nw_password))
                         {
@@ -108,13 +99,26 @@
                                         $hash_nw_password,
                                         $id
                                     ]);
-                                    $_SESSION["user"]->password = $hash_nw_password;
-                                    echo "modifié";
+                                    $_SESSION["user"]->password = $hash_nw_password;                                                                      
                                 }
                             else
                                 {
                                     $this->msg_error = "Les mots de passe ne correspondent pas";
                                 }
+                        }        
+                    //Met à jour le login et l'email de l'utilisateur dans la BDD 
+                    if(empty($this->msg_error))                                   
+                        {                            
+                            $update = $this->bdd->prepare("UPDATE utilisateurs SET login=?, email=? WHERE id=?");
+                            $update->execute([
+                                $this->login,
+                                $this->email,
+                                $id
+                            ]);
+                            $_SESSION["user"]->login = $this->login;
+                            $_SESSION["user"]->email = $this->email;
+
+                            $this->msg_valid = "Modification(s) prise(nt) en compte";
                         }                    
                 }
         }    

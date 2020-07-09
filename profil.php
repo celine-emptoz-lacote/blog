@@ -37,8 +37,18 @@
             ?>
                         </p>
             <?php
-                    }
+                    }                   
+                if(!empty($user->msg_valid))
+                    {
             ?>
+                        <p class="msg_error">
+            <?php
+                        echo $user->msg_valid;
+            ?>
+                        </p>
+            <?php
+                    }
+            ?>            
         </form>
     </main>
 

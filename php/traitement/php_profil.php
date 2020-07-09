@@ -12,17 +12,20 @@
     else
         {
             if(isset($_POST["valid_modif"], $_POST["login"], $_POST["old_password"], $_POST["email"]))
-                {
+                {                   
                     if(password_verify($_POST["old_password"], $_SESSION["user"]->password))
-                        {
-                            $login = $_POST["login"];
-                            $old_password = $_POST["old_password"];
+                        {                           
+                            $login = $_POST["login"];                           
                             $email = $_POST["email"];
                             $nw_password = $_POST["nw_password"];
                             $conf_password = $_POST["conf_password"];
                             $id = $_SESSION["user"]->id;
 
-                            $user->updateUser($login, $old_password, $email, $id, $nw_password, $conf_password);
+                            $user->updateUser($login, $email, $id, $nw_password, $conf_password);
+                        }
+                    else
+                        {
+                            echo $msg_error_mdp ="Ce n'est pas le bon mot de passe";
                         }
                 }
         }
