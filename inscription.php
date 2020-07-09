@@ -51,10 +51,6 @@ require 'php/fonction/fonctions.php';
         </form>
     </main>
 
-<<<<<<< HEAD
-    <?php //include 'php/include/footer.php';?>
-=======
     <?php include 'php/include/footer.php';?>
->>>>>>> celine
 </body>
 </html>
