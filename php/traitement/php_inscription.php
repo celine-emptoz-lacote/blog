@@ -11,7 +11,7 @@
         }
     else
         {
-            if(isset($_POST["valid_insc"]) && !empty($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["conf_password"]) && !empty($_POST["email"]))
+            if(isset($_POST["valid_insc"], $_POST["login"], $_POST["password"], $_POST["conf_password"], $_POST["email"]) && !empty($_POST["login"]) && !empty($_POST["password"]) && !empty($_POST["conf_password"]) && !empty($_POST["email"]))
                 {
                     $login = $_POST["login"];
                     $password = password_hash($_POST["password"], PASSWORD_DEFAULT);

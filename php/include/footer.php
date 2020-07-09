@@ -66,7 +66,7 @@
   </div>
 
 <!-- SI PAS CONNECTER  -->
-<?php if (!isset($_SESSION['id'])) : ?>
+<?php if (!isset($_SESSION['user'])) : ?>
   <hr>
 
   <ul class="list-unstyled list-inline text-center py-2">
