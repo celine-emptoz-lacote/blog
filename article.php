@@ -7,17 +7,9 @@
 
     $bd = connexionPDO();
     $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
-    var_dump( $resultat);
 
-    //$resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateurs','utilisateurs.id','id_article',$id_article);
-     $requete_commentaires = $bd->prepare("SELECT * FROM commentaires WHERE id_article = $id_article");
-     $requete_commentaires->execute();
-     $resultat_commentaires = $requete_commentaires->fetchall();
+    $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
 
-    var_dump($resultat_commentaires);
-    $resultat_user = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','commentaires.id_article',$id_article);
-    
-    var_dump($resultat_user);
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -30,16 +22,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link href="src/fontello/css/fontello.css" rel="stylesheet">
     <link href="src/css/styles.css" rel="stylesheet">
-    <title><?= $resultat['titre'] ?></title>
+    <title><?= $resultat[0]['titre'] ?></title>
 </head>
 <body>
 
     <header><?php include 'php/include/header.php' ?></header>
 
     <main>
-        <h1><?= $resultat['titre']?></h1>
-        <p><?= $resultat['article']?></p>
-        <p><em>Ecris par <?= $resultat['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat['date'])) ?></em></p>
+        <h1><?= $resultat[0]['titre']?></h1>
+        <p><?= $resultat[0]['article']?></p>
+        <p><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
 
 
 <!-- SI IL Y A DES COMM-->
@@ -52,14 +44,14 @@
         <div> 
             <?php for ($i = 0 ; $i<COUNT($resultat_commentaires) ; $i++) :?>
                 <p><?= $resultat_commentaires[$i]['commentaire'] ?></p> 
-                <p>Par : <b><?= ucfirst($resultat_user['login']) ?></b> , le <?=strftime("%d %B %Y",strtotime($resultat_user['date'])) ?></p> 
+                <p>Par : <b><?= ucfirst($resultat_commentaires[$i]['login']) ?></b> , le <?=strftime("%d %B %Y",strtotime($resultat_commentaires[$i]['date'])) ?></p> 
             <?php endfor ;?>
         </div>
     
     <?php endif ;?>
 
-        <!-- SI UTILISATEUR CONNECTER  -->
-        <?php if($_SESSIONS['user']->id) :?>
+        <!-- SI UTILISATEUR CONNECTE  -->
+        <?php if(isset($_SESSION["user"]->id)) :?>
         <form action="php/traitement/formulaire_commentaires.php?id=<?= $id_article ?>" method="POST">
 
             <label for="commenataire">Votre commentaire :</label>
