@@ -16,7 +16,7 @@
     <title>Connexion</title>
 </head>
 <body>
-    <?php //include 'php/include/header.php';?>
+    <header><?php include 'php/include/header.php';?></header>
 
     <main>
         <h1>Formulaire de Connexion</h1>
