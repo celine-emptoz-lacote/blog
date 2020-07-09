@@ -7,6 +7,7 @@
 
     $bd = connexionPDO();
     $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
+    var_dump($resultat);
 
     $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
 
@@ -30,6 +31,7 @@
 
     <main>
         <h1><?= $resultat[0]['titre']?></h1>
+        <img src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
         <p><?= $resultat[0]['article']?></p>
         <p><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
 
