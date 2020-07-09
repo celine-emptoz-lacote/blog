@@ -33,10 +33,15 @@
         <p><?php if(isset($_SESSION['erreur'])) { echo $_SESSION['erreur'] ; }?></p>
         <p><?php if(isset($_SESSION['success'])) { echo $_SESSION['success'] ; }?></p>
 
-        <form action="php/traitement/formulaire_creer_article.php" method="POST">
+        <form action="php/traitement/formulaire_creer_article.php" method="POST" enctype="multipart/form-data">
 
             <label for="titre">Titre de l'article :</label>
             <input type="text" id="titre" name="titre">
+
+            <label for="image">Votre image : </label>
+            <input type="file" id="image" accept=".jpg,.jpeg,.png,.gif" name="image">
+             <!-- On limite le fichier à 100Ko -->
+            <input type="hidden" name="MAX_FILE_SIZE" value="100000">
 
             <label for="categorie">Choisir la catégorie : </label>
             <select name="categorie" id="categorie">
