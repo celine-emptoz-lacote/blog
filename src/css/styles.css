@@ -1,0 +1,22 @@
+footer {
+    color: white;
+    background-color: rgb(54, 54, 54);
+}
+
+.footer-copyright {
+    background-color: black;
+}
+
+hr {
+    border-top: 1px solid rgb(85, 85, 85) ;
+}
+
+/*** INDEX ***/
+
+.section_index {
+    display: flex;
+    justify-content: space-evenly;
+}
+.card_index {
+    width: 30%;
+}
