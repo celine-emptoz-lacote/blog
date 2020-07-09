@@ -1,6 +1,14 @@
 <?php
     session_start();
     require 'php/fonction/fonctions.php';
+
+    $bd = connexionPDO();
+
+
+    $requete_recuperation_articles = $bd->prepare("SELECT * FROM articles ORDER BY `date` DESC LIMIT 3 " );
+    $requete_recuperation_articles->execute();
+    $resultat_articles = $requete_recuperation_articles->fetchall();
+
 ?>
 
 <!DOCTYPE html>
