@@ -9,6 +9,8 @@
     $requete_recuperation_articles->execute();
     $resultat_articles = $requete_recuperation_articles->fetchall();
 
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +22,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link href="src/fontello/css/fontello.css" rel="stylesheet">
     <link href="src/css/styles.css" rel="stylesheet">
 
@@ -30,18 +33,21 @@
 
     <main>
 
-            <h1>TITRE</h1>
+            <h1 class="titre_h1_index">Prog<span class="titre">'Blog</span></h1>
+            <h3 >Le blog sur la programmation</h3>
+            <div class="div_index">
+                <p>Vous êtes débutant en Programmation, en Hacking ou en informatique de façon générale ? Vous souhaitez apprendre la programmation ? Ce blog  est fait pour vous.</p>
+                <p>Nous allons voir ensemble les concepts de programmation et les systèmes se cachant derrière les applications et sites web que vous utilisez tout les jours.</p>
+                <p>Si vous bloquez sur un concept de programmation, vous trouverez probablement une réponse sur ce site. Nous publions des articles très régulièrement. Ceux-ci ont pour objectif de répondre à une question ou de résoudre un problème que vous pouvez rencontrer.</p>
+            </div>
+           
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit quod quidem at rerum accusantium quis voluptatum. Numquam sunt magni, consequuntur, illum itaque iusto iure aperiam facere, odio qui maiores architecto?</p>
-
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. In aliquid accusamus sequi natus ipsa enim id ex voluptate quaerat aliquam explicabo facilis ab velit, harum laboriosam itaque. Non, sint magnam?Veniam reiciendis, perferendis vero nulla sapiente ipsum obcaecati voluptate. Hic nisi ab corporis, magni labore quo at eveniet harum placeat. Dolorem dolore nemo facilis voluptatibus impedit, assumenda libero. Tempora, esse.</p>
-
-            <section class="section_index">
+            <section class="section_index bg-light" >
                 <?php if(isset($resultat_articles)) : ?>
                     <?php for ($i=0 ; $i<COUNT($resultat_articles) ; $i++) :?>
                         <div class="card_index">
-                            <h2><?= $resultat_articles[$i]['titre'] ?></h2>
-                            <p><?= mb_strimwidth($resultat_articles[$i]['article'],0,300,'..') ?></p>
+                            <h4 ><?= $resultat_articles[$i]['titre'] ?></h4>
+                            <p><?= mb_strimwidth($resultat_articles[$i]['article'],0,300,'...') ?></p>
                             <a href="article.php?id=<?= $resultat_articles[$i]['id'] ?>">Lire la suite</a>
                         </div>
                     <?php endfor ;?>

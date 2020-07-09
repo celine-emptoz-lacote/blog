@@ -4,8 +4,8 @@ $categories = recuperation($bd,'nom','categories');
 
 ?>
 
-<nav class="navbar navbar-expand-lg navbar-light ">
-  <a class="navbar-brand" href="index.php" title ="Retour à l'accueil">Mon blog</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
+  <a class="navbar-brand" href="index.php" title ="Retour à l'accueil">Le Prog<span class="titre">'Blog</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -49,7 +49,7 @@ $categories = recuperation($bd,'nom','categories');
     <?php endif ;?>
     
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a class="nav-link dropdown-toggle " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Les catégories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
