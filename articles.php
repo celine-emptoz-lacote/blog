@@ -1,5 +1,5 @@
 <?php 
-    session_start();
+    session_start();    
     include 'php/traitement/php_articles.php';
 ?>
 <!DOCTYPE html>

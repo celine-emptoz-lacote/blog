@@ -31,9 +31,28 @@
 
     function affichageArticles($all_articles)
         {
-            foreach($all_articles as $article => $elemet)
+            foreach($all_articles as $article => $element)
                 {
-                    var_dump($elemet);
+                    ?>
+                    <section>
+                        <section>
+                            <?= $element["titre"] ?>
+                        </section>
+                        <section>
+                            <section>
+                                <!-- image -->
+                            </section>
+                            <section>
+                                <section>
+                                    <!-- texte -->
+                                </section>
+                                <section>
+                                     <!-- date -->
+                                </section>
+                            </section>
+                        </section>
+                    </section>
+                    <?php
                 }
         }
     
