@@ -19,20 +19,9 @@
     <header><?php //include 'php/include/header.php' ?></header>
 
     <main>
-        <?php
-            for($i=1; $i<=$nb_pages; $i++)
-                {
-                    if($i==$page)
-                        {
-                            echo "$i /";
-                        }
-                    else
-                        {
-                            ?>
-                            <a href="articles.php?p=<?= $i ?>"><?= $i?></a> /
-                            <?php
-                        }                    
-                }
+        <?php      
+            affichageArticles($all_articles);
+            pagination($nb_pages, $page);//Affiche la pagination
         ?>
     </main>
 
