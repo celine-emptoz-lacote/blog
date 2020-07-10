@@ -1,5 +1,6 @@
 <?php 
-    include 'php/traitement/php_profil.php';   
+    include 'php/traitement/php_profil.php'; 
+    require 'php/include/connexion.php'; 
 ?>
 <!DOCTYPE html>
 <html>

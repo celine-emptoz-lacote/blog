@@ -49,8 +49,12 @@ h3 {
 .card_index {
     width: 30%;
     padding: 2%;
+    text-align: center;
 }
 
+.card_index img {
+    width: 50%;
+}
 .card_index a{
    display: block;
 }

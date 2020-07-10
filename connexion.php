@@ -1,5 +1,6 @@
 <?php 
-    include 'php/traitement/php_connexion.php';     
+    include 'php/traitement/php_connexion.php'; 
+    require 'php/include/connexion.php';    
 ?>
 <!DOCTYPE html>
 <html>

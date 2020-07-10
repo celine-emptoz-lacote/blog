@@ -33,18 +33,20 @@ if (isset($_POST['valider'])) {
         }
         if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
         {
-            //On formate le nom du fichier ici...
+            //On formate le nom du fichier 
             $fichier = strtr($fichier, 
                 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
                 'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
             $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
             if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
-                echo 'Upload effectué avec succès !';
+                $_SESSION['success'] = 'Upload effectué avec succès !';
+                header('location: creer-article.php');
             }
             else //Sinon (la fonction renvoie FALSE).
             {
-                echo 'Echec de l\'upload !';
+                $_SESSION['erreur'] =  'Echec de l\'upload !';
+                header('location: ../../creer-article.php');
             }
         }
         else

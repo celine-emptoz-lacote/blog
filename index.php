@@ -1,5 +1,11 @@
 <?php
     session_start();
+    require 'php/include/connexion.php';
+    $categories = recuperation($bd,'nom','categories');
+
+    $requete_recuperation_articles = $bd->prepare("SELECT * FROM articles ORDER BY `date` DESC LIMIT 3 " );
+    $requete_recuperation_articles->execute();
+    $resultat_articles = $requete_recuperation_articles->fetchall();
 ?>
 
 <!DOCTYPE html>
@@ -21,7 +27,7 @@
     <header><?php include 'php/include/header.php' ?></header>
 
     <main>
-
+            <?php if (isset($_SESSION['erreur'])) { echo $_SESSION['erreur']; } ?>
             <h1 class="titre_h1_index">Prog<span class="titre">'Blog</span></h1>
             <h3 >Le blog sur la programmation</h3>
             <div class="div_index">
@@ -30,12 +36,12 @@
                 <p>Si vous bloquez sur un concept de programmation, vous trouverez probablement une réponse sur ce site. Nous publions des articles très régulièrement. Ceux-ci ont pour objectif de répondre à une question ou de résoudre un problème que vous pouvez rencontrer.</p>
             </div>
            
-
             <section class="section_index bg-light" >
                 <?php if(isset($resultat_articles)) : ?>
                     <?php for ($i=0 ; $i<COUNT($resultat_articles) ; $i++) :?>
                         <div class="card_index">
                             <h4 ><?= $resultat_articles[$i]['titre'] ?></h4>
+                            <img src="php/traitement/upload/<?= $resultat_articles[$i]['image'] ?>" alt="Image de l'article">
                             <p><?= mb_strimwidth($resultat_articles[$i]['article'],0,300,'...') ?></p>
                             <a href="article.php?id=<?= $resultat_articles[$i]['id'] ?>">Lire la suite</a>
                         </div>
@@ -51,3 +57,4 @@
     <?php include 'php/include/footer.php' ?>
 </body>
 </html>
+<?php unset($_SESSION['erreur']) ; ?>

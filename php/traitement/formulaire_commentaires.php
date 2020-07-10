@@ -1,6 +1,5 @@
 <?php
-session_start();
-require '../fonction/fonctions.php';
+
 
 if (isset($_POST['valider'])) {
 
@@ -15,7 +14,7 @@ if (isset($_POST['valider'])) {
 
         $requete_insert_commentaire = $bd->prepare("INSERT INTO `commentaires`( `commentaire`, `id_article`, `id_utilisateur`, `date`) VALUES (?,?,?,NOW())");
         $requete_insert_commentaire->execute(array($commentaire,$id_article,$id_utilisateur));
-        header("location: ../../article.php?id=$id_article");
+        
     }
 
 

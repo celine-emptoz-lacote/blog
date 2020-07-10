@@ -1,15 +1,14 @@
 <?php 
     session_start();
-    require 'php/fonction/fonctions.php';
+    require 'php/include/connexion.php';
+
     $id_article = $_GET['id'];
 
-    setlocale(LC_TIME, "fr_FR","French");
+     setlocale(LC_TIME, "fr_FR","French");
+     
+     $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
 
-    $bd = connexionPDO();
-    $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
-    var_dump($resultat);
-
-    $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
+     $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
 
 ?>
 <!DOCTYPE html>

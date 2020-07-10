@@ -1,14 +1,3 @@
-<?php
-require 'php/fonction/fonctions.php';
-$bd = connexionPDO();
-$categories = recuperation($bd,'nom','categories');
-
-$requete_recuperation_articles = $bd->prepare("SELECT * FROM articles ORDER BY `date` DESC LIMIT 3 " );
-$requete_recuperation_articles->execute();
-$resultat_articles = $requete_recuperation_articles->fetchall();
-
-?>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light" id="nav">
   <a class="navbar-brand" href="index.php" title ="Retour à l'accueil">Le Prog<span class="titre">'Blog</span></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,6 +47,7 @@ $resultat_articles = $requete_recuperation_articles->fetchall();
           Les catégories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a href="articles.php">Tout les articles</a>
           <?php if (isset($categories))  :?>
               <?php for ($i = 0 ; $i<COUNT($categories) ; $i++) :?>
                 <a class="dropdown-item" href="#"><?= $categories[$i]['nom'] ?></a>

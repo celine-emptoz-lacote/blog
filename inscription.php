@@ -1,5 +1,6 @@
 <?php 
     include 'php/traitement/php_inscription.php';
+    require 'php/include/connexion.php';
 ?>
 <!DOCTYPE html>
 <html>

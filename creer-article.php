@@ -1,15 +1,15 @@
 <?php
     session_start();
-    require 'php/fonction/fonctions.php';
-    $bd= connexionPDO();
+    require 'php/include/connexion.php';
+
+    if ($_SESSION['user']->id_droits != 1337 && $_SESSION['user']->id_droits != 42  ) {
+        $_SESSION['erreur'] = "Vous n'avez pas les droits necessaire pour acceder à cette page";
+        header('location: index.php');
+    }
+
     $requete = $bd->prepare("SELECT * FROM categories");
     $requete->execute();
     $resultat = $requete->fetchall();
-
-    var_dump($resultat);
-
-   
-
 
 ?>
 <!DOCTYPE html>
@@ -28,7 +28,7 @@
 <body>
 
     <header><?php include 'php/include/header.php' ?></header>
-
+  
     <main>
         <p><?php if(isset($_SESSION['erreur'])) { echo $_SESSION['erreur'] ; }?></p>
         <p><?php if(isset($_SESSION['success'])) { echo $_SESSION['success'] ; }?></p>
@@ -40,7 +40,7 @@
 
             <label for="image">Votre image : </label>
             <input type="file" id="image" accept=".jpg,.jpeg,.png,.gif" name="image">
-             <!-- On limite le fichier à 100Ko -->
+             <!-- On limite le fichier -->
             <input type="hidden" name="MAX_FILE_SIZE" value="100000">
 
             <label for="categorie">Choisir la catégorie : </label>
