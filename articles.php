@@ -20,8 +20,14 @@
 
     <main>
         <?php      
-            affichageArticles($all_articles);
-            pagination($nb_pages, $page);//Affiche la pagination
+            affichageArticles($all_articles);//Affiche les articles
+            ?>
+            <section class="pagination">
+                <?php
+                    pagination($nb_pages, $page);//Affiche la pagination
+                ?>
+            </section>
+            <?php            
         ?>
     </main>
 

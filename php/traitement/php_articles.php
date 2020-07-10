@@ -34,20 +34,20 @@
             foreach($all_articles as $article => $element)
                 {
                     ?>
-                    <section>
-                        <section>
-                            <?= $element["titre"] ?>
+                    <section class="articles">
+                        <section class="titre_articles">
+                            <h1><?= $element["titre"] ?></h1>
                         </section>
-                        <section>
+                        <section class="infos_articles">
                             <section>
-                                <!-- image -->
+                                <img src="php/traitement/upload/<?= $element["image"] ?>" alt="photo article" class="img_article">
                             </section>
-                            <section>
-                                <section>
-                                    <!-- texte -->
+                            <section class="lecture_articles">
+                                <section class="texte_aticles">
+                                    <p><?= $element["article"] ?></p><!-- Limiter le nombre de caractère -->
                                 </section>
-                                <section>
-                                     <!-- date -->
+                                <section class="date_articles">
+                                    <img src="src/image/calendar.png" alt="logo calendar"><?php echo date('d-m-Y', strtotime($element["date"])); ?>
                                 </section>
                             </section>
                         </section>
@@ -67,8 +67,8 @@
                      }
                  else
                      {
-                         ?>
-                         <a href="articles.php?p=<?= $i ?>"><?= $i?></a> /
+                         ?>                         
+                            <a href="articles.php?p=<?= $i ?>"><?= $i?></a> /                        
                          <?php
                      }                    
              }
