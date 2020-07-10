@@ -2,6 +2,10 @@
     session_start();
     require 'php/include/connexion.php';
 
+    if (!isset($_GET['id']) ){
+        header('location: index.php');
+    }
+
     $id_article = $_GET['id'];
 
      setlocale(LC_TIME, "fr_FR","French");
@@ -9,7 +13,7 @@
      $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
 
      $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
-
+    
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -29,10 +33,10 @@
     <header><?php include 'php/include/header.php' ?></header>
 
     <main>
-        <h1><?= $resultat[0]['titre']?></h1>
-        <img src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
-        <p><?= $resultat[0]['article']?></p>
-        <p><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
+        <h1 class="text-center m-4"><?= $resultat[0]['titre']?></h1>
+        <img class="d-block m-auto p-5" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
+        <p class="m-3"><?= $resultat[0]['article']?></p>
+        <p class="m-3"><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
 
 
 <!-- SI IL Y A DES COMM-->
@@ -40,9 +44,9 @@
     
         <div>
         <!-- COMPTER LES COMS-->
-            <h3><?= COUNT($resultat_commentaires) ?> Commentaire(s)</h3>
+            <h3 class="text-danger"><?= COUNT($resultat_commentaires) ?> Commentaire(s)</h3>
         </div>
-        <div> 
+        <div class="commentaires m-4"> 
             <?php for ($i = 0 ; $i<COUNT($resultat_commentaires) ; $i++) :?>
                 <p><?= $resultat_commentaires[$i]['commentaire'] ?></p> 
                 <p>Par : <b><?= ucfirst($resultat_commentaires[$i]['login']) ?></b> , le <?=strftime("%d %B %Y",strtotime($resultat_commentaires[$i]['date'])) ?></p> 
@@ -53,12 +57,14 @@
 
         <!-- SI UTILISATEUR CONNECTE  -->
         <?php if(isset($_SESSION["user"]->id)) :?>
-        <form action="php/traitement/formulaire_commentaires.php?id=<?= $id_article ?>" method="POST">
 
-            <label for="commenataire">Votre commentaire :</label>
-            <textarea name="commentaire" id="commentaire" cols="30" rows="10"></textarea>
-
-            <input type="submit" name="valider">
+        <form action="" method="POST" class="m-4"> 
+            <div class="form-group">
+                <label for="commenataire">Votre commentaire :</label>
+                <textarea name="commentaire" id="commentaire" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <input type="submit" name="valider" class="btn btn-danger d-block m-auto  p-1">
+            
         
         </form>
         <?php endif ;?>
