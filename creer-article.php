@@ -30,32 +30,41 @@
     <header><?php include 'php/include/header.php' ?></header>
   
     <main>
-        <p><?php if(isset($_SESSION['erreur'])) { echo $_SESSION['erreur'] ; }?></p>
-        <p><?php if(isset($_SESSION['success'])) { echo $_SESSION['success'] ; }?></p>
+        <h1 class="text-center mt-4">Créer un article</h1>
+        <?php if(isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-75 p-3 m-auto'>".$_SESSION['erreur']."</p>" ; }?></p>
+        <?php if(isset($_SESSION['success'])) { echo "<p class='alert alert-success w-75 p-3 m-auto'>".$_SESSION['success']."</p>" ; }?></p>
 
-        <form action="php/traitement/formulaire_creer_article.php" method="POST" enctype="multipart/form-data">
+        
+        <form action="php/traitement/formulaire_creer_article.php" method="POST" enctype="multipart/form-data" class="w-75 p-3 m-auto">
+            <div class="form-group">
+                <label for="titre"  >Titre de l'article :</label>
+                <input type="text" id="titre" name="titre" class="form-control">
+            </div>
 
-            <label for="titre">Titre de l'article :</label>
-            <input type="text" id="titre" name="titre">
+            <div class="form-group">
+                <label for="image">Votre image : </label>
+                <input type="file" id="image" accept=".jpg,.jpeg,.png,.gif" name="image" class="form-control-file" >
+                <!-- On limite le fichier -->
+                <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+            </div>
 
-            <label for="image">Votre image : </label>
-            <input type="file" id="image" accept=".jpg,.jpeg,.png,.gif" name="image">
-             <!-- On limite le fichier -->
-            <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+            <div class="form-group">
+                <label for="categorie">Choisir la catégorie : </label>
+                <select name="categorie" id="categorie" class="form-control" >
+                    <option value="">--Choisir une option--</option>
+                    <?php for($i=0; $i<COUNT($resultat) ; $i++) : ?>
+                        <option value="<?= $resultat[$i]['id'] ?>"> <?= $resultat[$i]['nom'] ?> </option>
+                    <?php endfor ?>
+                    
+                </select>
+            </div>
 
-            <label for="categorie">Choisir la catégorie : </label>
-            <select name="categorie" id="categorie">
-                <option value="">--Choisir une option--</option>
-                <?php for($i=0; $i<COUNT($resultat) ; $i++) : ?>
-                    <option value="<?= $resultat[$i]['id'] ?>"> <?= $resultat[$i]['nom'] ?> </option>
-                <?php endfor ?>
-                
-            </select>
+            <div class="form-group">
+                <label for="article">Texte de votre article :</label>
+                <textarea name="article" id="article" cols="30" rows="10" class="form-control"></textarea>  
+            </div>
 
-            <label for="article">Texte de votre article :</label>
-            <textarea name="article" id="article" cols="30" rows="10"></textarea>  
-
-            <input type="submit" name="valider">
+            <input type="submit" name="valider" class="btn btn-danger d-block m-auto w-25 p-2">
             
                   
         </form>

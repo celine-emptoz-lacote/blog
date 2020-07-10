@@ -7,7 +7,7 @@ if (isset($_POST['valider'])) {
     var_dump($_POST);
     var_dump($_FILES);
     
-    if (!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['article'])) {
+    if (!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['article']) && !empty($_FILES) ) {
         
 
         $titre = $_POST['titre'];
@@ -25,11 +25,13 @@ if (isset($_POST['valider'])) {
         //verifications
         if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
         {
-            $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg, txt ou doc...';
+            $_SESSION['erreur'] = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg...';
+            header('location: ../../creer-article.php');
         }
         if($taille>$taille_maxi)
         {
-            $erreur = 'Le fichier est trop gros...';
+            $_SESSION['erreur'] = 'Le fichier est trop gros...';
+            header('location: ../../creer-article.php');
         }
         if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
         {
@@ -41,7 +43,7 @@ if (isset($_POST['valider'])) {
             if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
                 $_SESSION['success'] = 'Upload effectué avec succès !';
-                header('location: creer-article.php');
+                header('location: ../../creer-article.php');
             }
             else //Sinon (la fonction renvoie FALSE).
             {
@@ -49,10 +51,7 @@ if (isset($_POST['valider'])) {
                 header('location: ../../creer-article.php');
             }
         }
-        else
-        {
-            echo $erreur;
-        }
+      
 
 
         $requete = $bd->prepare("INSERT INTO `articles`( `article`, `id_utilisateur`, `id_categorie`, `date`, `titre`,`image`) VALUES (?,?,?,NOW(),?,?)");
