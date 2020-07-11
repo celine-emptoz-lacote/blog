@@ -58,6 +58,33 @@ h3 {
 .card_index a{
    display: block;
 }
+/* DEBUT ARTICLES */
+.articles
+    {
+        display: flex;
+        flex-direction: column;
+    }
+.titre_articles
+    {
+        text-align: center;        
+    }
+.infos_articles
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+.img_article
+    {
+        width: 40vw;
+    }
+.pagination
+    {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+/* FIN ARTICLES */
 
 /*** PAGE ARTICLE***/
 .section_article {

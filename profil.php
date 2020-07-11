@@ -19,6 +19,7 @@
     <header><?php include 'php/include/header.php';?></header>
 
     <main>    
+    <h1>Modifier mes informations</h1>
         <section class="container mb-5 mt-5 d-flex justify-content-center">
             <form action="" method="POST">            
                 <section class="form-group">
