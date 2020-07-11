@@ -1,5 +1,5 @@
 <?php
-    $bd = connexionPDO();
+    // $bd = connexionPDO();
 ?>
 
 <footer class="page-footer font-small stylish-color-dark pt-4">

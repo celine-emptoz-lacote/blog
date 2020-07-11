@@ -1,7 +1,7 @@
 <?php
     session_start();
     require 'php/include/connexion.php';
-    $categories = recuperation($bd,'nom','categories');
+   
 
     $requete_recuperation_articles = $bd->prepare("SELECT * FROM articles ORDER BY `date` DESC LIMIT 3 " );
     $requete_recuperation_articles->execute();
@@ -43,8 +43,7 @@
                             <h4 ><?= $resultat_articles[$i]['titre'] ?></h4>
                             <img src="php/traitement/upload/<?= $resultat_articles[$i]['image'] ?>" alt="Image de l'article">
                             <p><?= mb_strimwidth($resultat_articles[$i]['article'],0,300,'...') ?></p>
-                            <?php echo gettype(intval($resultat_articles[$i]['id']) )?>
-                            <a href="article.php?id=<?= intval($resultat_articles[$i]['id']) ?>">Lire la suite</a>
+                            <a href="article.php?id=<?= $resultat_articles[$i]['id'] ?>">Lire la suite</a>
                         </div>
                     <?php endfor ;?>
                 <?php endif ;?>
