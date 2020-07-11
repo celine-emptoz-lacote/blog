@@ -2,18 +2,52 @@
     session_start();
     require 'php/include/connexion.php';
 
-    if (!isset($_GET['id']) ){
+    setlocale(LC_TIME, "fr_FR","French");
+
+    if (isset($_GET['id'])) {
+        
+        $requete_recuperation_articles = $bd->prepare("SELECT COUNT(*) FROM articles  " );
+        $requete_recuperation_articles->execute();
+        $resultat_articles = $requete_recuperation_articles->fetch();
+
+        if ( $_GET['id'] > 0 && $_GET['id'] <= $resultat_articles[0][0]){
+            $id_article = $_GET['id'];
+        } else {
+            header('location: index.php');
+        }    
+
+        $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
+        $com=5;
+        $nb_page = ceil(count($resultat_commentaires) / 5) ;
+
+        //verifie le gat page
+        if(isset($_GET["p"]) && $_GET["p"]>0 && $_GET["p"]<=$nb_page)
+        {
+            $page = (int) strip_tags($_GET["p"]);
+        }
+        else
+        {   
+            $page = 1;
+        } 
+
+        $a_partir_du = (($page-1)*$com); 
+
+        $pag = $bd->prepare("SELECT * FROM commentaires INNER JOIN utilisateurs ON commentaires.id_utilisateur = utilisateurs.id WHERE id_article = $id_article LIMIT $a_partir_du, $com ");
+        $pag->execute();
+        $res_pag = $pag->fetchall();
+        
+
+        $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
+         
+        $articles_aleatoire = $bd->prepare("SELECT * FROM articles WHERE id != 2 ORDER BY rand() LIMIT 0,3 ");
+        $articles_aleatoire->execute();
+        $resultat_aleatoir = $articles_aleatoire->fetchall();
+
+
+    } else {
         header('location: index.php');
     }
-
-    $id_article = $_GET['id'];
-
-     setlocale(LC_TIME, "fr_FR","French");
-     
-     $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
-
-     $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
-    
+ 
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,32 +67,62 @@
     <header><?php include 'php/include/header.php' ?></header>
 
     <main>
-        <h1 class="text-center m-4"><?= $resultat[0]['titre']?></h1>
-        <img class="d-block m-auto p-5" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
-        <p class="m-3"><?= $resultat[0]['article']?></p>
-        <p class="m-3"><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
-
-
+    <?php if (isset($resultat_aleatoir)) :?>
+    <section class="section_article">
+        <div>
+            <h1 class="text-center m-4"><?= $resultat[0]['titre']?></h1>
+            <img class="d-block m-auto p-5" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
+            <p class="m-3 text-justify"><?= $resultat[0]['article']?></p>
+            <p class="m-3 text-right"><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
+        </div>
+        <div class="section_article_div p-3 ">
+            <h3 class="m-4">D'autre articles</h3>
+            <?php for ($i=0 ; $i<COUNT($resultat_aleatoir) ; $i++) :?>
+            <article class="p-4 m-2 border">
+                <h5><?= $resultat_aleatoir[$i]['titre'] ?></h4> 
+                <p class="text-justify"><?= mb_strimwidth($resultat_aleatoir[$i]['article'],0,200,'...') ?></p>
+                <a href="article.php?id=<?= $resultat_aleatoir[$i]['id']?>">Lire la suite</a>       
+            </article>
+            
+            <?php endfor ;?>
+        </div>
+    </section>
+    <?php else :?>
+        <section>
+            <div>
+                <h1 class="text-center m-4"><?= $resultat[0]['titre']?></h1>
+                <img class="d-block m-auto p-5" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
+                <p class="m-3"><?= $resultat[0]['article']?></p>
+                <p class="m-3"><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
+            </div>
+        </section>
+    <?php endif ;?>
 <!-- SI IL Y A DES COMM-->
     <?php if (!empty($resultat_commentaires)) :?>
     
-        <div>
+    
         <!-- COMPTER LES COMS-->
-            <h3 class="text-danger"><?= COUNT($resultat_commentaires) ?> Commentaire(s)</h3>
-        </div>
-        <div class="commentaires m-4"> 
-            <?php for ($i = 0 ; $i<COUNT($resultat_commentaires) ; $i++) :?>
-                <p><?= $resultat_commentaires[$i]['commentaire'] ?></p> 
-                <p>Par : <b><?= ucfirst($resultat_commentaires[$i]['login']) ?></b> , le <?=strftime("%d %B %Y",strtotime($resultat_commentaires[$i]['date'])) ?></p> 
+        <div class="commentaires p-1 ml-4 mr-4"> 
+        <h3 class="text-danger"><?= COUNT($resultat_commentaires) ?> Commentaire(s)</h3>
+            <?php for ($i = 0 ; $i<COUNT($res_pag) ; $i++) :?>
+                <p class="bg-light m-0 "><b><?= ucfirst($res_pag[$i]['login']) ?></b> , le <?=strftime("%d %B %Y",strtotime($res_pag[$i]['date'])) ?></p> 
+                <p><?= $res_pag[$i]['commentaire'] ?></p> 
             <?php endfor ;?>
         </div>
+        
+        <!-- PAGINATION COMM -->
+        <?php for($i= 1 ; $i < $nb_page +1; $i++) :?>
+            <a href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
+            <?php $com = $com + 5 ; ?>
+        <?php endfor ;?>
+        
     
     <?php endif ;?>
 
         <!-- SI UTILISATEUR CONNECTE  -->
         <?php if(isset($_SESSION["user"]->id)) :?>
 
-        <form action="" method="POST" class="m-4"> 
+        <form action="php/traitement/formulaire_commentaires.php?id=<?= $_GET['id'] ?>" method="POST" class="m-4"> 
             <div class="form-group">
                 <label for="commenataire">Votre commentaire :</label>
                 <textarea name="commentaire" id="commentaire" cols="30" rows="10" class="form-control"></textarea>

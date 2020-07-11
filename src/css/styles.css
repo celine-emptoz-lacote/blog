@@ -59,3 +59,19 @@ h3 {
    display: block;
 }
 
+/*** PAGE ARTICLE***/
+.section_article {
+    display: flex;
+}
+
+.section_article div:first-child {
+    width: 70%;
+
+}
+
+.section_article_div {
+    width: 30%;
+    background-color: #f8f9fa4d;
+    color: grey;
+
+}
