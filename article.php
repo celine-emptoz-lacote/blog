@@ -17,10 +17,10 @@
         }    
 
         $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
-        $com=5;
+       
         $nb_page = ceil(count($resultat_commentaires) / 5) ;
 
-        //verifie le gat page
+        //verifie le get page
         if(isset($_GET["p"]) && $_GET["p"]>0 && $_GET["p"]<=$nb_page)
         {
             $page = (int) strip_tags($_GET["p"]);
@@ -30,9 +30,10 @@
             $page = 1;
         } 
 
-        $a_partir_du = (($page-1)*$com); 
+        $com=5;
+        $debut = (($page-1)*$com); 
 
-        $pag = $bd->prepare("SELECT * FROM commentaires INNER JOIN utilisateurs ON commentaires.id_utilisateur = utilisateurs.id WHERE id_article = $id_article LIMIT $a_partir_du, $com ");
+        $pag = $bd->prepare("SELECT * FROM commentaires INNER JOIN utilisateurs ON commentaires.id_utilisateur = utilisateurs.id WHERE id_article = $id_article LIMIT $debut, $com ");
         $pag->execute();
         $res_pag = $pag->fetchall();
         
@@ -111,12 +112,22 @@
         </div>
         
         <!-- PAGINATION COMM -->
-        <?php for($i= 1 ; $i < $nb_page +1; $i++) :?>
-            <a href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
-            <?php $com = $com + 5 ; ?>
-        <?php endfor ;?>
         
-    
+            <div class="text-center">
+            <?php for($i= 1 ; $i < $nb_page +1; $i++) :?>
+                <?php if (isset($_GET['p'])) :?>
+                    <?php if ($_GET['p'] == $i) :?>
+                    <a class="bg-primary text-white p-1" href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
+                    <?php else :?>
+                        <a  href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
+                    <?php endif ;?>
+                <?php else :?>
+                         <a class="bg-primary text-white p-1"  href="article.php?id=<?= $_GET['id']?>&p=1"><?= $i ?></a>
+                     <?php endif ;?>
+                <?php $com = $com + 5 ; ?>
+            <?php endfor ;?>
+            </div>
+      
     <?php endif ;?>
 
         <!-- SI UTILISATEUR CONNECTE  -->
@@ -127,7 +138,7 @@
                 <label for="commenataire">Votre commentaire :</label>
                 <textarea name="commentaire" id="commentaire" cols="30" rows="10" class="form-control"></textarea>
             </div>
-            <input type="submit" name="valider" class="btn btn-danger d-block m-auto  p-1">
+            <input type="submit" name=" valider " class="btn btn-danger d-block m-auto  p-2 ">
             
         
         </form>
