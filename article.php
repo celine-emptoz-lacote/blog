@@ -114,16 +114,13 @@
         <!-- PAGINATION COMM -->
         
             <div class="text-center">
+            
             <?php for($i= 1 ; $i < $nb_page +1; $i++) :?>
-                <?php if (isset($_GET['p'])) :?>
-                    <?php if ($_GET['p'] == $i) :?>
-                    <a class="bg-primary text-white p-1" href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
-                    <?php else :?>
-                        <a  href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
-                    <?php endif ;?>
+                <?php if ($page== $i) :?>
+                <a class="bg-primary text-white p-1" href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
                 <?php else :?>
-                         <a class="bg-primary text-white p-1"  href="article.php?id=<?= $_GET['id']?>&p=1"><?= $i ?></a>
-                     <?php endif ;?>
+                    <a  href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
+                <?php endif ;?>
                 <?php $com = $com + 5 ; ?>
             <?php endfor ;?>
             </div>

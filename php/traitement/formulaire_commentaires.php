@@ -1,11 +1,7 @@
 <?php 
 session_start();
-var_dump($_SESSION);
 
-
-
-if (isset($_POST['valider'])) {
-    echo "1";
+    
     //VERIFICATION DES CHAMPS
     if (!empty($_POST['commentaire'])) {
         require '../../php/fonction/fonctions.php';
@@ -24,7 +20,7 @@ if (isset($_POST['valider'])) {
     }
 
 
-}
+
 
 
 ?>
