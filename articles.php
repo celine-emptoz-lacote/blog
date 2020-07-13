@@ -1,6 +1,6 @@
 <?php 
     session_start();    
-    include 'php/traitement/php_articles.php';    
+    include 'php/traitement/php_articles.php';      
 ?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
 
     <main id="main_articles">
         <?php      
-            affichageArticles($all_articles);//Affiche les articles
+            affichageArticles($categories, $a_partir_du, $par_page, $bd);//Affiche les articles
             ?>
             <section class="pagination">
                 <?php
@@ -31,6 +31,6 @@
         ?>
     </main>
 
-    <?php //include 'php/include/footer.php' ?>
+    <?php include 'php/include/footer.php' ?>
 </body>
 </html>

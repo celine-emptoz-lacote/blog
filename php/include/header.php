@@ -50,7 +50,7 @@
           <a href="articles.php">Tout les articles</a>
           <?php if (isset($categories))  :?>
               <?php for ($i = 0 ; $i<COUNT($categories) ; $i++) :?>
-                <a class="dropdown-item" href="#"><?= $categories[$i]['nom'] ?></a>
+                <a class="dropdown-item" href="articles.php?categorie=<?= $categories[$i]['id']?>&p=1"><?= $categories[$i]['nom'] ?></a>
               <?php endfor ;?>
           <?php endif ;?>
            

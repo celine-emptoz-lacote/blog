@@ -1,7 +1,6 @@
 <?php
     session_start();
     require 'php/include/connexion.php';
-   
 
     $requete_recuperation_articles = $bd->prepare("SELECT * FROM articles ORDER BY `date` DESC LIMIT 3 " );
     $requete_recuperation_articles->execute();
