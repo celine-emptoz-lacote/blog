@@ -1,6 +1,6 @@
 <?php 
     session_start();    
-    include 'php/traitement/php_articles.php';
+    include 'php/traitement/php_articles.php';    
 ?>
 <!DOCTYPE html>
 <html>
@@ -16,9 +16,9 @@
     <title>Articles</title>
 </head>
 <body>
-    <header><?php //include 'php/include/header.php' ?></header>
+    <header><?php include 'php/include/header.php' ?></header>
 
-    <main>
+    <main id="main_articles">
         <?php      
             affichageArticles($all_articles);//Affiche les articles
             ?>

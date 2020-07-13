@@ -44,7 +44,8 @@
                             </section>
                             <section class="lecture_articles">
                                 <section class="texte_aticles">
-                                    <p><?= $element["article"] ?></p><!-- Limiter le nombre de caractère -->
+                                    <p><?= substr($element["article"], 0, 200) ?>...</p><!-- Limiter le nombre de caractère -->
+                                    <p><a href="article.php?id=<?= $element["id"] ?>&p=1">Lire la suite...</a></p>
                                 </section>
                                 <section class="date_articles">
                                     <img src="src/image/calendar.png" alt="logo calendar"><?php echo date('d-m-Y', strtotime($element["date"])); ?>
