@@ -5,16 +5,10 @@
     setlocale(LC_TIME, "fr_FR","French");
 
     if (isset($_GET['id'])) {
-        
-        $requete_recuperation_articles = $bd->prepare("SELECT COUNT(*) FROM articles  " );
-        $requete_recuperation_articles->execute();
-        $resultat_articles = $requete_recuperation_articles->fetch();
 
-        if ( $_GET['id'] > 0 && $_GET['id'] <= $resultat_articles[0][0]){
-            $id_article = $_GET['id'];
-        } else {
-            header('location: index.php');
-        }    
+
+        $id_article = $_GET['id'];
+
 
         $resultat_commentaires = recuperation_join($bd,'commentaires','utilisateurs','commentaires.id_utilisateur','utilisateurs.id','id_article',$id_article);
        
@@ -39,7 +33,11 @@
         
 
         $resultat = recuperation_join($bd,'articles','utilisateurs','articles.id_utilisateur','utilisateurs.id','articles.id',$id_article);
-         
+
+        if (empty($resultat)) {
+            header('location: index.php');
+        } 
+
         $articles_aleatoire = $bd->prepare("SELECT * FROM articles WHERE id != 2 ORDER BY rand() LIMIT 0,3 ");
         $articles_aleatoire->execute();
         $resultat_aleatoir = $articles_aleatoire->fetchall();
