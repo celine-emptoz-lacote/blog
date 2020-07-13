@@ -1,11 +1,11 @@
 <?php
-    require_once 'php/fonction/fonctions.php';    
-
-    $bdd = connexionPDO();    
+       
+     require 'php/include/connexion.php';
+      
 
     //Création de la pagination
     //Compte le nombre d'articles
-    $query_count_articles = $bdd->query("SELECT COUNT(id) as count_articles FROM articles");
+    $query_count_articles = $bd->query("SELECT COUNT(id) as count_articles FROM articles");
     $count_articles = $query_count_articles->fetch();     
     
     //Initialise les variables pour la pagination
@@ -26,7 +26,7 @@
     $a_partir_du = (($page-1)*$par_page); //Permet de savoir à partir de quel article on commence l'affichage
     
     //Récupère tous les articles limiter à 5 par page à partir du 0 (puis 5, 10...)
-    $query_all_articles = $bdd->query("SELECT * FROM articles ORDER BY date DESC LIMIT $a_partir_du, $par_page");
+    $query_all_articles = $bd->query("SELECT * FROM articles ORDER BY date DESC LIMIT $a_partir_du, $par_page");
     $all_articles = $query_all_articles->fetchAll(PDO::FETCH_ASSOC);    
 
     function affichageArticles($all_articles)

@@ -29,4 +29,6 @@ function recuperation_join($base,$table,$table2,$table_join1,$table_join2,$param
 
 
 
+
+
 ?>
