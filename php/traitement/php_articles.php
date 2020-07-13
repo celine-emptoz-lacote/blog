@@ -109,7 +109,7 @@
             //Initialise les variables pour la pagination
             $nb_articles = $count_articles['count_articles'];         
         
-            $nb_pages = ceil($nb_articles/$par_page);     
+            $nb_pages = ceil($nb_articles/$par_page);
 
              //Regarde le numéro de la page
             if(isset($_GET["start"]) && $_GET["start"]>0 && $_GET["start"]<=$nb_pages)
