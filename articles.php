@@ -1,6 +1,6 @@
 <?php 
     session_start();    
-    include 'php/traitement/php_articles.php';      
+    require 'php/include/connexion.php'; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,15 +19,8 @@
     <header><?php include 'php/include/header.php' ?></header>
 
     <main id="main_articles">
-        <?php      
-            affichageArticles($categories, $a_partir_du, $par_page, $bd);//Affiche les articles
-            ?>
-            <section class="pagination">
-                <?php
-                    pagination($nb_pages, $page);//Affiche la pagination
-                ?>
-            </section>
-            <?php            
+        <?php              
+            include 'php/traitement/php_articles.php';          
         ?>
     </main>
 
