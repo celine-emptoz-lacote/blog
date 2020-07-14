@@ -1,10 +1,9 @@
-<?php                   
-    $par_page = 5;    
-             
+<?php                               
+$par_page = 5;     
 //--------------------Affiche les articles suivant la catéorie choisie
     if(isset($_GET["categorie"]) && !empty($_GET["categorie"]) && !empty($categories))
-        {            
-            $get_id_categorie = $_GET["categorie"];
+        {                        
+            $get_id_categorie = (int)$_GET["categorie"];//Impose le fait que ça doit être un entier                
 
             //Compte les articles de la catégorie
             $query_count_articles_cat =  $bd->query("SELECT COUNT(id) as count_articles_cat FROM articles WHERE id_categorie=$get_id_categorie");
@@ -74,8 +73,24 @@
                     if($nb_articles_cat >$par_page)
                         {                       
                             ?>
+                            <section class="pagination_bis">
+                            <?php
+                            if($page > 1)
+                                {
+                                    ?>
+                                    <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $page - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
+                                    <?php
+                                }
+                            if($page < $nb_pages_cat)
+                                {
+                                    ?>
+                                    <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $page + 1 ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
+                                    <?php
+                                }
+                            ?>
+                            </section>
                             <section class="pagination">  
-                                <?php
+                            <?php
                             for($i=1; $i<=$nb_pages_cat; $i++)
                                 {
                                     if($i==$page)
@@ -124,8 +139,9 @@
             $a_partir_du = (($page-1)*$par_page); //Permet de savoir à partir de quel article on commence l'affichage   
     
             //Récupère tous les articles limiter à 5 par page à partir du 0 (puis 5, 10...)
-            $query_all_articles = $bd->query("SELECT * FROM articles ORDER BY date DESC LIMIT $a_partir_du, $par_page");
+            $query_all_articles = $bd->query("SELECT * FROM articles ORDER BY date DESC LIMIT $a_partir_du, $par_page");           
             $all_articles = $query_all_articles->fetchAll(PDO::FETCH_ASSOC);
+           
             
             ?>
             <h1>Tous les Articles</h1>
@@ -167,9 +183,25 @@
                     if($nb_articles>$par_page)
                         {
                             ?>
-                            <section class="pagination">  
+                            <section class="pagination_bis">
                                 <?php
-                            for($i=1; $i<=$nb_pages; $i++)
+                                if($page > 1)
+                                    {
+                                        ?>
+                                        <a href="articles.php?start=<?= $page - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
+                                        <?php
+                                    }
+                                if($page < $nb_pages)
+                                    {
+                                        ?>
+                                        <a href="articles.php?&start=<?= $page + 1 ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
+                                        <?php
+                                    }
+                                ?>
+                            </section>
+                            <section class="pagination"> 
+                                <?php
+                            for($i=1; $i<=$nb_pages; $i++)//Crée les numéros pour la pagination en fonction du nombre de pages
                                 {
                                     if($i==$page)
                                         {
@@ -186,31 +218,6 @@
                             </section> 
                             <?php
                         }   
-//TEST PAGINATION BEAUCOUP DE PAGES
-//Utiliser $page pour la gestion des "..."
-//Afficher : page précédente/ page / page suivante/.../ avant avant dernière page / avant dernière page / dernière page
-                    else if($nb_pages>10)
-                        {
-                            ?>
-                            <section class="pagination">  
-                                <?php
-                            for($i=1; $i<=$nb_pages; $i++)
-                                {
-                                    if($i==$page)
-                                        {
-                                            echo "$i /";
-                                        }
-                                    else if($i<3 || $i>)
-                                        {
-                                            ?>                         
-                                                <a href="articles.php?start=<?= $i ?>"><?= $i?></a> /                        
-                                            <?php
-                                        }                    
-                                }     
-                            ?>
-                            </section> 
-                            <?php
-                        }
                 }                 
         }                        
 ?>
