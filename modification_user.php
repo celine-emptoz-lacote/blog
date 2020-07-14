@@ -26,9 +26,13 @@ $infos_user = recuperation_join($bd,'utilisateurs','droits','utilisateurs.id_dro
     <header><?php include 'php/include/header.php'; ?></header>
 
     <main class="main_admin">
+
+
         <h1 class="text-center pb-3 pt-3">Modification des droits de <em><?= $infos_user[0]['login'] ?></em> </h1>
 
-        <form class="text-center mt-4 mb-4  w-50 m-auto p-5 bg-white border" action="php/traitement/formulaire_modification_user.php?id=<?= $id_utilisateur?>" method="POST">
+        <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-50 m-auto'>".$_SESSION['erreur']."</p>" ; } ?>
+        
+        <form class="text-center mt-4 mb-4  w-75 m-auto p-5 bg-white border" action="php/traitement/formulaire_modification_user.php?id=<?= $id_utilisateur?>" method="POST">
             <label class="p-1" for="login">Login :</label>
             <input class="p-1" type="text" id="login" name="login" value="<?= $infos_user[0]['login']?>" disabled>
 
@@ -39,7 +43,7 @@ $infos_user = recuperation_join($bd,'utilisateurs','droits','utilisateurs.id_dro
                 <option value="1" <?php if ($infos_user[0]['nom'] == "utilisateur") { echo "selected";}?>>Utilisateur</option>
             </select>
 
-            <input class="btn btn-primary d-block m-auto" type="submit" value="Modifier" name="modifier">
+            <input class=" btn-primary p-1" type="submit" value="Modifier" name="modifier">
            
         </form>
         
@@ -50,3 +54,4 @@ $infos_user = recuperation_join($bd,'utilisateurs','droits','utilisateurs.id_dro
     
 </body>
 </html>
+<?php unset($_SESSION['erreur']) ?>

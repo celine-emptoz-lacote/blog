@@ -1,13 +1,11 @@
 <?php
-
-$id_article = $_GET['id'];
-
+session_start();
 include 'php/include/connexion.php';
+$id_article = $_GET['id'];
 
 $article = $bd->prepare("SELECT * FROM articles WHERE id = $id_article");
 $article->execute();
 $resultat_article = $article->fetch();
-
 ?>
 
 
@@ -21,13 +19,17 @@ $resultat_article = $article->fetch();
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link href="src/fontello/css/fontello.css" rel="stylesheet">
     <link href="src/css/styles.css" rel="stylesheet">
 </head>
 <body>
     <header><?php include 'php/include/header.php'; ?></header>
-    <main class="main_admin">
+    <main >
         <h1 class="text-center">Modification de l'article</h1>
+
+        <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-75 m-auto'>".$_SESSION['erreur']."</p>" ; } ?>
+        <?php if (isset($_SESSION['success'])) { echo "<p class='alert alert-success w-75 m-auto' >".$_SESSION['success']."</p>" ; } ?>
 
         <form action="php/traitement/formulaire_modification_article.php?id=<?= $id_article ?>" method="POST" enctype="multipart/form-data" class="w-75 p-3 m-auto">
             <div class="form-group">
