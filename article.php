@@ -57,6 +57,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
     <link href="src/fontello/css/fontello.css" rel="stylesheet">
     <link href="src/css/styles.css" rel="stylesheet">
     <title><?= $resultat[0]['titre'] ?></title>
@@ -70,7 +71,7 @@
     <section class="section_article">
         <div>
             <h1 class="text-center m-4"><?= $resultat[0]['titre']?></h1>
-            <img class="d-block m-auto p-5" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
+            <img class="d-block m-auto p-5 img_article " src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
             <p class="m-3 text-justify"><?= $resultat[0]['article']?></p>
             <p class="m-3 text-right"><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
         </div>
@@ -78,7 +79,7 @@
             <h3 class="m-4">D'autre articles</h3>
             <?php for ($i=0 ; $i<COUNT($resultat_aleatoir) ; $i++) :?>
             <article class="p-4 m-2 border">
-                <h5><?= $resultat_aleatoir[$i]['titre'] ?></h4> 
+                <h5><?= $resultat_aleatoir[$i]['titre'] ?></h5> 
                 <p class="text-justify"><?= mb_strimwidth($resultat_aleatoir[$i]['article'],0,200,'...') ?></p>
                 <a href="article.php?id=<?= $resultat_aleatoir[$i]['id']?>">Lire la suite</a>       
             </article>
@@ -90,7 +91,7 @@
         <section>
             <div>
                 <h1 class="text-center m-4"><?= $resultat[0]['titre']?></h1>
-                <img class="d-block m-auto p-5" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
+                <img class="d-block m-auto p-5 img_article" src="php/traitement/upload/<?=$resultat[0]['image'] ?>" alt="">
                 <p class="m-3"><?= $resultat[0]['article']?></p>
                 <p class="m-3"><em>Ecris par <?= $resultat[0]['login'] ?> , le <?= strftime("%d %B %Y",strtotime($resultat[0]['date'])) ?></em></p>
             </div>
@@ -111,7 +112,7 @@
         
         <!-- PAGINATION COMM -->
         
-            <div class="text-center">
+            <div class="text-center m-2">
             
             <?php for($i= 1 ; $i < $nb_page +1; $i++) :?>
                 <?php if ($page== $i) :?>
@@ -130,7 +131,7 @@
 
         <form action="php/traitement/formulaire_commentaires.php?id=<?= $_GET['id'] ?>" method="POST" class="m-4"> 
             <div class="form-group">
-                <label for="commenataire">Votre commentaire :</label>
+                <label for="commentaire">Votre commentaire :</label>
                 <textarea name="commentaire" id="commentaire" cols="30" rows="10" class="form-control"></textarea>
             </div>
             <input type="submit" name=" valider " class="btn btn-danger d-block m-auto  p-2 ">

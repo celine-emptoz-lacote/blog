@@ -25,8 +25,10 @@ $resultat = $requete->fetch();
 <body>
     <header><?php include 'php/include/header.php';?></header>
 
-    <main>
-    
+    <main  class="main_admin">
+        <h1>Modification de la catégorie</h1>
+
+        <?php if (isset($_SESSION['erreur'])) { echo "<p>".$_SESSION['erreur']."</p>" ;} ?>
         <form action="php/traitement/modification_categorie.php?id=<?= $resultat['id'] ?>" method="POST" >
         
             <input type="text" name="categorie" value="<?= $resultat['nom'] ?>">
@@ -34,9 +36,11 @@ $resultat = $requete->fetch();
             <input type="submit" value="Modifier" name="modifier">
         
         </form>
+
+        <a class="btn btn-danger mt-4 mb-4 ml-auto mr-auto" href="admin.php">Retour</a>
     
     </main>
 
-    <footer></footer>
+    <?php include 'php/include/footer.php';?>
 </body>
 </html>

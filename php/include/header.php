@@ -16,7 +16,7 @@
             <a class="nav-link" href="profil.php">Profil</a>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="#">Déconnexion</a>
+            <a class="nav-link" href="php/traitement/deconnexion.php">Déconnexion</a>
         </li>
 
         <!-- SI MODERATEUR OU ADMIN  -->
@@ -47,7 +47,7 @@
           Les catégories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a href="articles.php">Tout les articles</a>
+          <a class="dropdown-item" href="articles.php">Tout les articles</a>
           <?php if (isset($categories))  :?>
               <?php for ($i = 0 ; $i<COUNT($categories) ; $i++) :?>
                 <a class="dropdown-item" href="articles.php?categorie=<?= $categories[$i]['id']?>&p=1"><?= $categories[$i]['nom'] ?></a>

@@ -65,7 +65,7 @@
 
   </div>
 
-<!-- SI PAS CONNECTER  -->
+<!-- SI PAS CONNECTE  -->
 <?php if (!isset($_SESSION['user']->id)) : ?>
   <hr>
 
@@ -81,7 +81,7 @@
     <ul class="list-unstyled list-inline text-center py-2">
    
    <li class="list-inline-item">
-     <a href="#!" class="btn btn-danger btn-rounded">Se deconnecter</a>
+     <a href="php/traitement/deconnexion.php" class="btn btn-danger btn-rounded">Se deconnecter</a>
    </li>
  </ul>
   <hr>
