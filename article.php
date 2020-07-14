@@ -79,7 +79,7 @@
             <h3 class="m-4">D'autre articles</h3>
             <?php for ($i=0 ; $i<COUNT($resultat_aleatoir) ; $i++) :?>
             <article class="p-4 m-2 border">
-                <h5><?= $resultat_aleatoir[$i]['titre'] ?></h4> 
+                <h5><?= $resultat_aleatoir[$i]['titre'] ?></h5> 
                 <p class="text-justify"><?= mb_strimwidth($resultat_aleatoir[$i]['article'],0,200,'...') ?></p>
                 <a href="article.php?id=<?= $resultat_aleatoir[$i]['id']?>">Lire la suite</a>       
             </article>
@@ -131,7 +131,7 @@
 
         <form action="php/traitement/formulaire_commentaires.php?id=<?= $_GET['id'] ?>" method="POST" class="m-4"> 
             <div class="form-group">
-                <label for="commenataire">Votre commentaire :</label>
+                <label for="commentaire">Votre commentaire :</label>
                 <textarea name="commentaire" id="commentaire" cols="30" rows="10" class="form-control"></textarea>
             </div>
             <input type="submit" name=" valider " class="btn btn-danger d-block m-auto  p-2 ">

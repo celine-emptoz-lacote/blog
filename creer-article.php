@@ -32,8 +32,8 @@
   
     <main>
         <h1 class="text-center mt-4">Créer un article</h1>
-        <?php if(isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-75 p-3 m-auto'>".$_SESSION['erreur']."</p>" ; }?></p>
-        <?php if(isset($_SESSION['success'])) { echo "<p class='alert alert-success w-75 p-3 m-auto'>".$_SESSION['success']."</p>" ; }?></p>
+        <?php if(isset($_SESSION['erreur'])) { echo '<p class="alert alert-danger w-75 p-3 m-auto">'.$_SESSION['erreur'].'</p>' ; }?></p>
+        <?php if(isset($_SESSION['success'])) { echo '<p class="alert alert-success w-75 p-3 m-auto">'.$_SESSION['success'].'</p>' ; }?></p>
 
         
         <form action="php/traitement/formulaire_creer_article.php" method="POST" enctype="multipart/form-data" class="w-75 p-3 m-auto">
