@@ -58,6 +58,16 @@ h3 {
 .card_index a{
    display: block;
 }
+
+@media screen and (max-width: 750px){
+    .section_index {
+        flex-direction: column;
+    }
+
+    .card_index {
+        width: 100%;
+    }
+}
 /* DEBUT ARTICLES */
 #main_articles
     {
@@ -180,9 +190,16 @@ thead {
     
 }
 
-.table1 {
+.scroll {
     width: 60%;
-    margin: 2% auto;
+    max-height: 40vh;
+    overflow:auto;
+    margin: 2% auto;  
+}
+
+
+.table1 {  
+    width: 100%;
 }
 
 .icon-trash {
@@ -208,6 +225,10 @@ thead {
     margin: auto;
 }
 
+.icon-right-circled, .icon-left-circled {
+    font-size: 30px;
+    text-decoration: none!important;
+}
 .titre_admin {
     margin-top: 4%;
 }
@@ -237,5 +258,13 @@ thead {
 .div_admin table , .div_admin form {
     margin: 3%;
     width: 50%;
+}
+
+@media screen and (max-width: 630px) {
+     .div_table2 {
+        overflow: auto;
+
+     }
+   
 }
 /*****************/

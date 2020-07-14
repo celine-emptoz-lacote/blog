@@ -12,26 +12,42 @@ if (isset($_SESSION['user'])) {
     $recuperation_users->execute();
     $resultat_users = $recuperation_users->fetchall();
     
+    $nb_articles = count(recuperation($bd,'*','articles'));
+
+    $nb_page = 5;
+
+    if (!isset($_GET['start'])) {
+        $offset = 0;
+    }
+    else {
+        $offset = $_GET['start'];
+    }
+    
+
+
+    
+
+
     
     if (isset($_GET['class'])) {
         if ($_GET['class'] == "plus" ) {
-            $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id ORDER BY `date` DESC ");
+            $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id ORDER BY `date` DESC LIMIT $nb_page OFFSET $offset");
             $recuperation_articles->execute();
             $resultat_recuperation_articles = $recuperation_articles->fetchall();
         }
         elseif ($_GET['class'] == "moins") {
-            $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id ORDER BY `date` ASC ");
+            $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id ORDER BY `date` ASC LIMIT $nb_page OFFSET $offset");
             $recuperation_articles->execute();
             $resultat_recuperation_articles = $recuperation_articles->fetchall();
         }
         else {
-            $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id  ");
+            $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id  LIMIT $nb_page OFFSET $offset");
             $recuperation_articles->execute();
             $resultat_recuperation_articles = $recuperation_articles->fetchall();
         }
     }
     else {
-        $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id  ");
+        $recuperation_articles = $bd->prepare("SELECT * FROM articles INNER JOIN utilisateurs ON articles.id_utilisateur = utilisateurs.id INNER JOIN categories ON articles.id_categorie = categories.id  LIMIT $nb_page OFFSET $offset ");
         $recuperation_articles->execute();
         $resultat_recuperation_articles = $recuperation_articles->fetchall();
     }
@@ -70,34 +86,35 @@ else {
 
         <section>
             <h2 class="titre_admin">Gestion utilisateurs</h2>
-
-            <table class="table1">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Email</th>
-                        <th>Droits</th>
-                        <th>Modifier</th>
-                        <th>Supprimer</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php for($i = 0 ; $i < COUNT($resultat_users) ; $i ++) :?>
-                    <tr>
-                        <td><?= $resultat_users[$i]['login'] ?></td>
-                        <td><?= $resultat_users[$i]['email'] ?></td>
-                        <td><?= $resultat_users[$i]['nom'] ?></td>
-                        <td><a class="icon-edit" href="modification_user.php?id=<?=$resultat_users[$i][0] ?>" title="Modifier"></a> </td>
-                        <td><a class="icon-trash" href="php/traitement/supprimer_user.php?id=<?= $resultat_users[$i][0] ?>" title="supprimer"></a></td>
-                    </tr>
-                    <?php endfor ;?>
-                </tbody>
-            </table>
+            <div class="scroll">
+                <table class="table1">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Droits</th>
+                            <th>Modifier</th>
+                            <th>Supprimer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php for($i = 0 ; $i < COUNT($resultat_users) ; $i ++) :?>
+                        <tr>
+                            <td><?= $resultat_users[$i]['login'] ?></td>
+                            <td><?= $resultat_users[$i]['email'] ?></td>
+                            <td><?= $resultat_users[$i]['nom'] ?></td>
+                            <td><a class="icon-edit" href="modification_user.php?id=<?=$resultat_users[$i][0] ?>" title="Modifier"></a> </td>
+                            <td><a class="icon-trash" href="php/traitement/supprimer_user.php?id=<?= $resultat_users[$i][0] ?>" title="supprimer"></a></td>
+                        </tr>
+                        <?php endfor ;?>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <section>
             <h2 class="titre_admin">Les articles</h2>
-
+            <div class="div_table2">
             <table class="table2">
                 <thead>
                     <tr>
@@ -127,6 +144,27 @@ else {
                 </tbody>
             
             </table>
+            </div>
+            <?php if(isset($_GET['start'])) :?>
+                <?php if ($_GET['start'] >= 5) : ?>
+                
+                    <?php $offset = $offset - 5 ?>
+                    <a class="icon-left-circled" href="admin.php?start=<?= $offset ?>"></a>
+                
+                 <?php endif ;?>
+            <?php endif ;?>
+           
+
+            <?php if(isset($_GET['start'])) :?>
+               <?php if($_GET['start'] < $nb_articles - 5) : ?>
+                <?php $offset = $_GET['start'] ?>
+                    <?php $offset = $offset + 5 ?>
+                    <a  class="icon-right-circled" href="admin.php?start=<?= $offset  ?>"></a> 
+               
+                <?php endif ;?>
+            <?php else :?>
+                <a class="icon-right-circled" href="admin.php?start=<?= $offset + 5?>"></a> 
+            <?php endif ;?>
             
             <h2 class="titre_admin">Catégories</h2>
             <div class="div_admin">
@@ -134,8 +172,8 @@ else {
                     <thead>
                         <tr>
                             <th>Nom</th>
-                            <th>Supprimer</th>
                             <th>Modifier</th>
+                            <th>Supprimer</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -149,8 +187,9 @@ else {
                     </tbody>
                 </table>
                 
-                <?php if (isset($_SESSION['erreur'])) { echo $_SESSION['erreur'];}?>
+                
                 <form action="php/traitement/ajout_categorie.php" method="POST">
+                
                     <label class="d-block mb-2">Ajouter une catégorie :</label>
                     
                     <input class="d-block w-75 m-auto" type="text" id="categorie" name="categorie" placeholder="Nom de la catégorie à ajouter">
