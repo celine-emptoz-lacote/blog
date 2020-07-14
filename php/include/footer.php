@@ -28,7 +28,7 @@
             <?php if (isset($categories)) :?>
                 <?php for ($i=0 ; $i<COUNT($categories); $i++) : ?>
                     <li>
-                        <a href="#!" ><?= ucwords(strtolower($categories[$i]['nom'])) ?></a>
+                        <a href="articles.php?categorie=<?= $categories[$i]['id']?>&p=1"><?= ucwords(strtolower($categories[$i]['nom'])) ?></a>
                     </li>
                 <?php endfor ;?>
             <?php endif ;?>

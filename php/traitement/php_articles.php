@@ -1,7 +1,7 @@
 <?php                   
     $par_page = 5;    
              
-//--------------------Affiche les articles suivant la catéories choisie
+//--------------------Affiche les articles suivant la catéorie choisie
     if(isset($_GET["categorie"]) && !empty($_GET["categorie"]) && !empty($categories))
         {            
             $get_id_categorie = $_GET["categorie"];
@@ -92,7 +92,7 @@
                             ?>
                             </section>  
                             <?php   
-                        } 
+                        }                         
                 }
             
                                                               
@@ -101,7 +101,7 @@
 //------------------Affiche des articles sans passer par les catégories
     else 
         {                       
-             //Création de la pagination
+            //Création de la pagination
             //Compte le nombre d'articles
             $query_count_articles = $bd->query("SELECT COUNT(id) as count_articles FROM articles");
             $count_articles = $query_count_articles->fetch();     
@@ -186,6 +186,31 @@
                             </section> 
                             <?php
                         }   
+//TEST PAGINATION BEAUCOUP DE PAGES
+//Utiliser $page pour la gestion des "..."
+//Afficher : page précédente/ page / page suivante/.../ avant avant dernière page / avant dernière page / dernière page
+                    else if($nb_pages>10)
+                        {
+                            ?>
+                            <section class="pagination">  
+                                <?php
+                            for($i=1; $i<=$nb_pages; $i++)
+                                {
+                                    if($i==$page)
+                                        {
+                                            echo "$i /";
+                                        }
+                                    else if($i<3 || $i>)
+                                        {
+                                            ?>                         
+                                                <a href="articles.php?start=<?= $i ?>"><?= $i?></a> /                        
+                                            <?php
+                                        }                    
+                                }     
+                            ?>
+                            </section> 
+                            <?php
+                        }
                 }                 
         }                        
 ?>
