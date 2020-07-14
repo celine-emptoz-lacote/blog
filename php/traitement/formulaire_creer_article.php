@@ -9,53 +9,61 @@ if (isset($_POST['valider'])) {
     
     if (!empty($_POST['titre']) && !empty($_POST['categorie']) && !empty($_POST['article']) && !empty($_FILES) ) {
         
+        
+            $titre = $_POST['titre'];
+            $categorie = $_POST['categorie'];
+            $article = $_POST['article'];
+            $id_utilisateur = $_SESSION['user']->id;
 
-        $titre = $_POST['titre'];
-        $categorie = $_POST['categorie'];
-        $article = $_POST['article'];
-        $id_utilisateur = $_SESSION['user']->id;
 
-
-        $dossier = 'upload/';
-        $fichier = basename($_FILES['image']['name']);
-        $taille_maxi = 600000;
-        $taille = filesize($_FILES['image']['tmp_name']);
-        $extensions = array('.png', '.gif', '.jpg', '.jpeg');
-        $extension = strrchr($_FILES['image']['name'], '.'); 
-        //verifications
-        if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
-        {
-            $_SESSION['erreur'] = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg...';
-            header('location: ../../creer-article.php');
-        }
-        if($taille>$taille_maxi)
-        {
-            $_SESSION['erreur'] = 'Le fichier est trop gros...';
-            header('location: ../../creer-article.php');
-        }
-        if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
-        {
-            //On formate le nom du fichier 
-            $fichier = strtr($fichier, 
-                'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ', 
-                'AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
-            $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
-            if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            $dossier = 'upload/';
+            $fichier = basename($_FILES['image']['name']);
+            $taille_maxi = 1000000;
+            $taille = filesize($_FILES['image']['tmp_name']);
+            $extensions = array('.png', '.gif', '.jpg', '.jpeg');
+            $extension = strrchr($_FILES['image']['name'], '.'); 
+            //verifications
+            if(!in_array($extension, $extensions)) //Si l'extension n'est pas dans le tableau
             {
-                $_SESSION['success'] = 'Upload effectué avec succès !';
-                header('location: ../../creer-article.php');
+                $erreur = 'Vous devez uploader un fichier de type png, gif, jpg, jpeg...';
             }
-            else //Sinon (la fonction renvoie FALSE).
+            if($taille>$taille_maxi)
             {
-                $_SESSION['erreur'] =  'Echec de l\'upload !';
-                header('location: ../../creer-article.php');
+                $erreur = 'Le fichier est trop gros...';
+                
             }
-        }
+            if(!isset($erreur)) //S'il n'y a pas d'erreur, on upload
+            {
+                //On formate le nom du fichier 
+                $fichier = strtr($fichier, 'ÀÁÂÃÄÅÇÈÉÊËÌÍÎÏÒÓÔÕÖÙÚÛÜÝàáâãäåçèéêëìíîïðòóôõöùúûüýÿ','AAAAAACEEEEIIIIOOOOOUUUUYaaaaaaceeeeiiiioooooouuuuyy');
+                $fichier = preg_replace('/([^.a-z0-9]+)/i', '-', $fichier);
+                if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+                {
+                    $_SESSION['success'] = 'Upload effectué avec succès !';
+                   
+                    $requete = $bd->prepare("INSERT INTO `articles`( `article`, `id_utilisateur`, `id_categorie`, `date`, `titre`,`image`) VALUES (?,?,?,NOW(),?,?)");
+                    $requete->execute(array($article,$id_utilisateur,$categorie,$titre,$fichier));
+                    
+                    header('location: ../../creer-article.php');
+                }
+                else 
+                {
+                    $_SESSION['erreur'] =  'Echec de l\'upload !';
+                    header('location: ../../creer-article.php');
+                }
+            }
+            else {
+                $_SESSION['erreur'] = $erreur;
+                header("location: ../../creer-article.php");
+
+            }
       
 
 
-        $requete = $bd->prepare("INSERT INTO `articles`( `article`, `id_utilisateur`, `id_categorie`, `date`, `titre`,`image`) VALUES (?,?,?,NOW(),?,?)");
-        $requete->execute(array($article,$id_utilisateur,$categorie,$titre,$fichier));
+        
+        
+
+        
     }
    
 }

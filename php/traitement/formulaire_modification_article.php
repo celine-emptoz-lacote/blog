@@ -1,5 +1,5 @@
-<?php
-
+<?php 
+session_start();
     if (isset($_POST['valider'])) {
 
         require '../../php/fonction/fonctions.php';
@@ -45,7 +45,7 @@
                     if(move_uploaded_file($_FILES['image']['tmp_name'], $dossier . $fichier)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
                     {
                         $_SESSION['success'] = 'Upload effectué avec succès !';
-                        header("location: ../../modification_article.php?id=$id_article");
+                        //header("location: ../../modification_article.php?id=$id_article");
                     }
                     else //Sinon (la fonction renvoie FALSE).
                     {
@@ -66,6 +66,7 @@
                
                 $up_article = $bd->prepare("UPDATE `articles` SET `article`=?,`id_categorie`=?,`titre`=? WHERE id = $id_article");
                 $up_article->execute(array($article,$categorie,$titre));
+                $_SESSION['success'] = 'Mise à jour effectuée !';
                 header("location: ../../modification_article.php?id=$id_article");
               
                 echo "sans photo";
