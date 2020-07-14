@@ -5,7 +5,7 @@ require 'php/include/connexion.php';
 $id_utilisateur = $_GET['id'];
 
 $infos_user = recuperation_join($bd,'utilisateurs','droits','utilisateurs.id_droits','droits.id','utilisateurs.id',$id_utilisateur);
-var_dump($infos_user);
+
 
 ?>
 <!DOCTYPE html>
@@ -25,20 +25,25 @@ var_dump($infos_user);
 <body>
     <header><?php include 'php/include/header.php'; ?></header>
 
-    <main>
-        <form action="php/traitement/formulaire_modification_user.php?id=<?= $id_utilisateur?>" method="POST">
-            <label for="login">Login :</label>
-            <input type="text" id="login" name="login" value="<?= $infos_user[0]['login']?>" disabled>
+    <main class="main_admin">
+        <h1 class="text-center pb-3 pt-3">Modification des droits de <em><?= $infos_user[0]['login'] ?></em> </h1>
 
-            <select name="droits" id="droits">
+        <form class="text-center mt-4 mb-4  w-50 m-auto p-5 bg-white border" action="php/traitement/formulaire_modification_user.php?id=<?= $id_utilisateur?>" method="POST">
+            <label class="p-1" for="login">Login :</label>
+            <input class="p-1" type="text" id="login" name="login" value="<?= $infos_user[0]['login']?>" disabled>
+
+            <select class="p-1" name="droits" id="droits">
                 <option value="">Droits de l'utilisateur</option>
                 <option value="1337" <?php if ($infos_user[0]['nom'] == "administrateur") { echo "selected";}?>>Administrateur</option>
                 <option value="42" <?php if ($infos_user[0]['nom'] == "moderateur") { echo "selected";}?> >Modérateur</option>
                 <option value="1" <?php if ($infos_user[0]['nom'] == "utilisateur") { echo "selected";}?>>Utilisateur</option>
             </select>
 
-            <input type="submit" value="Modifier" name="modifier">
+            <input class="btn btn-primary d-block m-auto" type="submit" value="Modifier" name="modifier">
+           
         </form>
+        
+        <a class="btn btn-danger mt-4 mb-4 ml-auto mr-auto" href="admin.php">Retour</a>
     </main>
 
     <?php include 'php/include/footer.php'; ?>

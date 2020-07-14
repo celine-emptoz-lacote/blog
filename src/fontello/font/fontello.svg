@@ -6,6 +6,14 @@
 <font id="fontello" horiz-adv-x="1000" >
 <font-face font-family="fontello" font-weight="400" font-stretch="normal" units-per-em="1000" ascent="850" descent="-150" />
 <missing-glyph horiz-adv-x="1000" />
+<glyph glyph-name="trash" unicode="&#xe800;" d="M0 633l0 141 289 0 0 76 246 0 0-76 289 0 0-141-824 0z m43-783l0 676 738 0 0-676-738 0z" horiz-adv-x="824" />
+
+<glyph glyph-name="edit" unicode="&#xe801;" d="M0-150l0 818 188 182 521 0 0-226 31 31 162-160-380-381-239-78 76 238 262 262 0 226-369 0 0-156-164 0 0-668 533 0 0 143 88 87 0-318-709 0z m361 264l119 39-80 82z" horiz-adv-x="902" />
+
+<glyph glyph-name="down-micro" unicode="&#xe802;" d="M235 231l-235 236h471z" horiz-adv-x="471" />
+
+<glyph glyph-name="up-micro" unicode="&#xe803;" d="M471 231h-471l235 236z" horiz-adv-x="471" />
+
 <glyph glyph-name="google-plus-circle" unicode="&#xf2b3;" d="M512 345q0 18-4 36h-202v-74h122q-7-42-42-67t-80-25q-55 0-94 40t-39 95 39 95 94 40q52 0 86-33l58 57q-60 55-144 55-89 0-151-62t-63-152 63-151 151-63q92 0 149 58t57 151z m192-26h61v62h-61v61h-61v-61h-61v-62h61v-61h61v61z m153 31q0-117-57-215t-156-156-215-58-216 58-155 156-58 215 58 215 155 156 216 58 215-58 156-156 57-215z" horiz-adv-x="857.1" />
 
 <glyph glyph-name="twitter-circled" unicode="&#xf30a;" d="M480 830q200 0 340-140t140-340q0-198-140-339t-340-141q-198 0-339 141t-141 339q0 200 141 340t339 140z m196-392q30 22 46 48-32-12-54-14 30 18 42 52-30-16-60-22-28 28-70 28-40 0-67-28t-27-66q0-2 1-10t1-12q-120 6-194 100-14-24-14-48 0-50 44-78-26 0-44 12l0-2q0-34 21-60t55-32q-16-4-24-4-12 0-18 2 20-66 88-66-50-40-118-40l-22 0q68-42 144-42 122 0 196 83t74 187l0 12z" horiz-adv-x="960" />

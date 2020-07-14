@@ -35,6 +35,30 @@
       "css": "dribbble-circled",
       "code": 62236,
       "src": "entypo"
+    },
+    {
+      "uid": "3ab2abf6f936d3e53ee8c184cedaed82",
+      "css": "trash",
+      "code": 59392,
+      "src": "elusive"
+    },
+    {
+      "uid": "7b6c617d6d1e3f22db493839f0483bf6",
+      "css": "edit",
+      "code": 59393,
+      "src": "elusive"
+    },
+    {
+      "uid": "35674c31693db324f2fd6a48f1079263",
+      "css": "down-micro",
+      "code": 59394,
+      "src": "websymbols"
+    },
+    {
+      "uid": "fbed8311a5af2a8e5599246d9939a475",
+      "css": "up-micro",
+      "code": 59395,
+      "src": "websymbols"
     }
   ]
 }

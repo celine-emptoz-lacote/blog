@@ -20,6 +20,9 @@
 
     <main>    
     <h1>Modifier mes informations</h1>
+
+        <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-50 m-auto'>".$_SESSION['erreur']."</p>" ; } ?>
+
         <section class="container mb-5 mt-5 d-flex justify-content-center">
             <form action="" method="POST">            
                 <section class="form-group">
@@ -76,3 +79,5 @@
     <?php include 'php/include/footer.php';?>
 </body>
 </html>
+
+<?php unset($_SESSION['erreur']) ?>

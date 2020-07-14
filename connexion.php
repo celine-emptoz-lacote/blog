@@ -1,6 +1,7 @@
 <?php 
     include 'php/traitement/php_connexion.php'; 
-    require 'php/include/connexion.php';    
+    require 'php/include/connexion.php';  
+     
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,9 @@
     <header><?php include 'php/include/header.php';?></header>
 
     <main>
+
+        <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-50 m-auto' >".$_SESSION['erreur']."</p>" ; }?>
+
         <h1>Formulaire de Connexion</h1>
         <form action="" method="POST">
             <label for="login" name="login">Login :</label>
@@ -47,3 +51,5 @@
     <?php include 'php/include/footer.php' ?>
 </body>
 </html>
+
+<?php unset($_SESSION['erreur']) ?>

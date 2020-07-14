@@ -151,3 +151,91 @@ h3 {
     color: grey;
 
 }
+
+/*** PAGE ADMIN ***/
+
+.main_admin{
+    text-align: center;
+    background-color: #f9f6f6;
+}
+
+.img_admin {
+    width: 15%;
+    margin: 2% auto;
+}
+table {
+    border-collapse: collapse;
+}
+
+table , tr , td {
+    border: 1px solid black;
+}
+
+thead , th {
+    border: 1px solid white;
+}
+thead {
+    background-color: black;
+    color: white;
+    
+}
+
+.table1 {
+    width: 60%;
+    margin: 2% auto;
+}
+
+.icon-trash {
+    color: red!important;
+}
+
+.icon-edit {
+    color: green!important;
+}
+
+.table2 {
+    width: 90%;
+    margin: auto;
+}
+
+.table2 td , .table2 th {
+    width: 10%;
+}
+
+.table2 img {
+    display: block;
+    width: 50%;
+    margin: auto;
+}
+
+.titre_admin {
+    margin-top: 4%;
+}
+
+.titre_admin:before , .titre_admin:after{
+  content:''; 
+  display:inline-block; 
+  vertical-align: middle; 
+  width: 4rem; 
+  height: 1px; 
+  background: #000 }
+ 
+
+
+.titre_admin:before { 
+    margin-right: .3rem 
+}
+.titre_admin:after { 
+    margin-left: .3rem 
+}
+
+.div_admin {
+    display: flex;
+    align-items: center;
+}
+
+.div_admin table , .div_admin form {
+    margin: 3%;
+    width: 50%;
+}
+/*****************/

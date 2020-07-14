@@ -26,7 +26,7 @@ $resultat_article = $article->fetch();
 </head>
 <body>
     <header><?php include 'php/include/header.php'; ?></header>
-    <main>
+    <main class="main_admin">
         <h1 class="text-center">Modification de l'article</h1>
 
         <form action="php/traitement/formulaire_modification_article.php?id=<?= $id_article ?>" method="POST" enctype="multipart/form-data" class="w-75 p-3 m-auto">
@@ -59,10 +59,12 @@ $resultat_article = $article->fetch();
                 <textarea name="article" id="article" cols="30" rows="10" class="form-control"><?= $resultat_article['article'] ?></textarea>  
             </div>
 
-            <input type="submit" name="valider" class="btn btn-danger d-block m-auto w-25 p-2">
+            <input type="submit" name="valider" class="btn btn-danger  m-auto  p-2">
+            <a class="btn btn-primary  m-auto p-2" href="admin.php">Retour</a>
                 
                     
         </form>
+        
     </main>
     <?php include 'php/include/footer.php';?>
     
