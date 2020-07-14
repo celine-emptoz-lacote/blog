@@ -28,7 +28,7 @@
             <?php if (isset($categories)) :?>
                 <?php for ($i=0 ; $i<COUNT($categories); $i++) : ?>
                     <li>
-                        <a href="#!" ><?= ucwords(strtolower($categories[$i]['nom'])) ?></a>
+                        <a href="articles.php?categorie=<?= $categories[$i]['id']?>&p=1" ><?= ucwords(strtolower($categories[$i]['nom'])) ?></a>
                     </li>
                 <?php endfor ;?>
             <?php endif ;?>
@@ -81,7 +81,7 @@
     <ul class="list-unstyled list-inline text-center py-2">
    
    <li class="list-inline-item">
-     <a href="#!" class="btn btn-danger btn-rounded">Se deconnecter</a>
+     <a href="php/traitement/deconnexion.php" class="btn btn-danger btn-rounded">Se deconnecter</a>
    </li>
  </ul>
   <hr>
