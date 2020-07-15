@@ -45,12 +45,11 @@
                             <a href="article.php?id=<?= $resultat_articles[$i]['id'] ?>&p=1">Lire la suite</a>
                         </div>
                     <?php endfor ;?>
-                <?php endif ;?>
-                
-
-
+                <?php endif ;?>                
             </section>
-
+            <section id="bouton_index">
+                <a href="articles.php" class="btn btn-primary">Voir plus</a>
+            </section>            
     </main>
 
     <?php include 'php/include/footer.php' ?>
