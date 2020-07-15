@@ -22,6 +22,7 @@
     <main class="main_form">    
     <h1>Modifier mes informations</h1>
 
+    <!-- Affichage des messages -->
     <?php if(!empty($user->msg_error)) { echo '<p class="alert alert-danger w-75 p-3 m-auto text-center">'.$user->msg_error.'</p>' ; }?></p>
     <?php if(!empty($user->msg_valid)) { echo '<p class="alert alert-success w-75 p-3 m-auto text-center">'.$user->msg_valid.'</p>' ; }?></p>
     <?php if(isset($msg_error_mdp)) { echo '<p class="alert alert-danger w-75 p-3 m-auto text-center">'.$msg_error_mdp.'</p>' ; }?></p>
