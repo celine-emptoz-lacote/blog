@@ -20,36 +20,38 @@
 <body>
     <header><?php include 'php/include/header.php';?></header>
 
-    <main>              
+    <main class="main_form">              
         <h1>Formulaire d'inscription</h1>
-        <form action="" method="POST">
-            <label for="login">Login :</label>
-            <input type="text" name="login" required>
 
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" required>
+        <?php if(isset($msg_error)) { echo '<p class="alert alert-danger w-75 p-3 m-auto text-center">'.$msg_error.'</p>' ; }?></p>
+        
+        <section class="container mb-5 mt-5 d-flex justify-content-center">            
+            <form action="" method="POST">
+                <section class="form-group">
+                    <label for="login" class="d-flex justify-content-center">Login :</label>
+                    <input type="text" name="login" class="form-control text-center" required>
+                </section>
 
-            <label for="conf_password">Confirmer mot de passe :</label>
-            <input type="password" name="conf_password" required>
+               <section class="form-group">
+                    <label for="password" class="d-flex justify-content-center">Mot de passe :</label>
+                    <input type="password" name="password" class="form-control text-center" required>
+               </section>
 
-            <label for="email">email :</label>
-            <input type="email" name="email" required>
+                <section class="form-group">
+                    <label for="conf_password" class="d-flex justify-content-center">Confirmer mot de passe :</label>
+                    <input type="password" name="conf_password" class="form-control text-center" required>
+                </section>
 
-            <input type="submit" name="valid_insc" value="Inscription">
+                <section class="form-group">
+                    <label for="email" class="d-flex justify-content-center">email :</label>
+                    <input type="email" name="email" class="form-control text-center" required>
+                </section>
 
-            <?php
-                if(isset($msg_error))
-                    {
-            ?>
-                        <p class="msg_error">
-            <?php
-                        echo $msg_error;
-            ?>
-                        </p>
-            <?php
-                    }
-            ?>
-        </form>
+                <section class="d-flex justify-content-center">
+                    <input type="submit" name="valid_insc" value="Inscription" class="btn btn-primary">
+                </section>               
+            </form>
+        </section>
     </main>
 
     <?php include 'php/include/footer.php';?>

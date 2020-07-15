@@ -19,60 +19,38 @@
 <body>
     <header><?php include 'php/include/header.php';?></header>
 
-    <main>    
+    <main class="main_form">    
     <h1>Modifier mes informations</h1>
 
-        <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-50 m-auto'>".$_SESSION['erreur']."</p>" ; } ?>
+    <?php if(!empty($user->msg_error)) { echo '<p class="alert alert-danger w-75 p-3 m-auto text-center">'.$user->msg_error.'</p>' ; }?></p>
+    <?php if(!empty($user->msg_valid)) { echo '<p class="alert alert-success w-75 p-3 m-auto text-center">'.$user->msg_valid.'</p>' ; }?></p>
+    <?php if(isset($msg_error_mdp)) { echo '<p class="alert alert-danger w-75 p-3 m-auto text-center">'.$msg_error_mdp.'</p>' ; }?></p>
 
         <section class="container mb-5 mt-5 d-flex justify-content-center">
             <form action="" method="POST">            
                 <section class="form-group">
                     <label for="login" class="d-flex justify-content-center">Login :</label>
-                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="login" value="<?= $_SESSION["user"]->login ?>" required>            
+                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="login" value="<?= $_SESSION["user"]->login ?>" required>            
                 </section>
                 <section class="form-group">
                     <label for="email" class="d-flex justify-content-center">Email :</label>
-                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="email" value="<?= $_SESSION["user"]->email ?>" required>            
+                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="email" value="<?= $_SESSION["user"]->email ?>" required>            
                 </section>
                 <section class="form-group">
                     <label for="old_password" class="d-flex justify-content-center">Mot de passe actuel :</label>
-                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="old_password" required>            
+                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="old_password" required>            
                 </section>
                 <section class="form-group">
                     <label for="nw_password" class="d-flex justify-content-center">Nouveau mot de passe :</label>
-                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="nw_password">            
+                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="nw_password">            
                 </section>
                 <section class="form-group">
                     <label for="conf_password" class="d-flex justify-content-center">Confirmer mot de passe :</label>
-                    <input type="text" class="form-control text-center" id="exampleInputEmail1" aria-describedby="emailHelp" name="conf_password">            
+                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="conf_password">            
                 </section>            
                 <section class="d-flex justify-content-center">
-                    <input type="submit" name="valid_modif" value="Modifier" class="btn btn-primary ">
-                </section>
-                
-
-                <?php
-                    if(!empty($user->msg_error))
-                        {
-                ?>
-                            <p class="msg_error">
-                <?php
-                            echo $user->msg_error;
-                ?>
-                            </p>
-                <?php
-                        }                   
-                    if(!empty($user->msg_valid))
-                        {
-                ?>
-                            <p class="msg_error">
-                <?php
-                            echo $user->msg_valid;
-                ?>
-                            </p>
-                <?php
-                        }
-                ?>            
+                    <input type="submit" name="valid_modif" value="Modifier" class="btn btn-primary">
+                </section>                               
             </form>
         </section>
     </main>
@@ -80,5 +58,3 @@
     <?php include 'php/include/footer.php';?>
 </body>
 </html>
-
-<?php unset($_SESSION['erreur']) ?>
