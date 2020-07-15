@@ -154,6 +154,13 @@ h3 {
     {
         margin-left: auto;
     }
+.par_page
+    {
+        display: flex;
+        justify-content: space-between;
+        width: 30vw;
+        margin-bottom: 2vh;
+    }
 /* FIN ARTICLES */
 
 /*** PAGE ARTICLE***/

@@ -1,8 +1,16 @@
-<?php                               
-$par_page = 5;     
+<?php            
+    if(isset($_GET["par_page"]) && !empty($_GET["par_page"]) && $_GET["par_page"]>= 5)                   
+        {
+            $par_page = (int) $_GET["par_page"];
+        }
+    else
+        {
+            $par_page = 5;
+        }
+     
 //--------------------Affiche les articles suivant la catéorie choisie
     if(isset($_GET["categorie"]) && !empty($_GET["categorie"]) && !empty($categories))
-        {                        
+        {                                    
             $get_id_categorie = (int)$_GET["categorie"];//Impose le fait que ça doit être un entier                
 
             //Compte les articles de la catégorie
@@ -84,7 +92,7 @@ $par_page = 5;
                             if($page < $nb_pages_cat)
                                 {
                                     ?>
-                                    <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $page + 1 ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
+                                    <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $page + 1 ?>&par_page=<?= $par_page ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
                                     <?php
                                 }
                             ?>
@@ -100,7 +108,7 @@ $par_page = 5;
                                     else
                                         {                                        
                                             ?>                         
-                                                <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $i ?>"><?= $i?></a> /                        
+                                                <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $i ?>&par_page=<?= $par_page ?>"><?= $i?></a> /                        
                                             <?php
                                         }                    
                                 }        
@@ -108,14 +116,12 @@ $par_page = 5;
                             </section>  
                             <?php   
                         }                         
-                }
-            
-                                                              
+                }                                                                          
         }
 
 //------------------Affiche des articles sans passer par les catégories
     else 
-        {                       
+        {                      
             //Création de la pagination
             //Compte le nombre d'articles
             $query_count_articles = $bd->query("SELECT COUNT(id) as count_articles FROM articles");
@@ -188,13 +194,13 @@ $par_page = 5;
                                 if($page > 1)
                                     {
                                         ?>
-                                        <a href="articles.php?start=<?= $page - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
+                                        <a href="articles.php?start=<?= $page - 1 ?>&par_page=<?= $par_page ?>" class="btn btn-primary">&laquo; Page précédente</a>
                                         <?php
                                     }
                                 if($page < $nb_pages)
                                     {
                                         ?>
-                                        <a href="articles.php?&start=<?= $page + 1 ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
+                                        <a href="articles.php?&start=<?= $page + 1 ?>&par_page=<?= $par_page ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
                                         <?php
                                     }
                                 ?>

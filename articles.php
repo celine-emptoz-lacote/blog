@@ -23,6 +23,18 @@
         <?php              
             include 'php/traitement/php_articles.php';          
         ?>
+        <form action="" method="GET">
+            <section class="par_page">
+                <label for="par_page">Nombre d'articles par page</label>
+                <select name="par_page" id="par_page">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                    <option value="20">20</option>
+                </select>
+                <input type="submit" value="Afficher" name="afficher">
+            </section>
+        </form>                
     </main>
 
     <?php include 'php/include/footer.php' ?>
