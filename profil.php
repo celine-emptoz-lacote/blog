@@ -39,15 +39,15 @@
                 </section>
                 <section class="form-group">
                     <label for="old_password" class="d-flex justify-content-center">Mot de passe actuel :</label>
-                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="old_password" required>            
+                    <input type="password" class="form-control text-center" aria-describedby="emailHelp" name="old_password" required>            
                 </section>
                 <section class="form-group">
                     <label for="nw_password" class="d-flex justify-content-center">Nouveau mot de passe :</label>
-                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="nw_password">            
+                    <input type="password" class="form-control text-center" aria-describedby="emailHelp" name="nw_password">            
                 </section>
                 <section class="form-group">
                     <label for="conf_password" class="d-flex justify-content-center">Confirmer mot de passe :</label>
-                    <input type="text" class="form-control text-center" aria-describedby="emailHelp" name="conf_password">            
+                    <input type="password" class="form-control text-center" aria-describedby="emailHelp" name="conf_password">            
                 </section>            
                 <section class="d-flex justify-content-center">
                     <input type="submit" name="valid_modif" value="Modifier" class="btn btn-primary">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 15 juil. 2020 à 16:04
+-- Généré le :  mer. 15 juil. 2020 à 16:36
 -- Version du serveur :  10.4.10-MariaDB
 -- Version de PHP :  7.3.12
 
@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS `articles` (
   `id_categorie` int(11) NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `image` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `id_categorie` (`id_categorie`)
 ) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `articles` (
 --
 
 INSERT INTO `articles` (`id`, `titre`, `article`, `id_utilisateur`, `id_categorie`, `date`, `image`) VALUES
-(1, 'Qu\'est-ce que HTML ?', 'HTML signifie « HyperText Markup Language » qu\'on peut traduire par « langage de balises pour l\'hypertexte ». Il est utilisé afin de créer et de représenter le contenu d\'une page web et sa structure. D\'autres technologies sont utilisées avec HTML pour décrire la présentation d\'une page (CSS) et/ou ses fonctionnalités interactives (JavaScript).\r\n\r\nHTML fonctionne grâce à des « balises » qui sont insérées au sein d\'un texte normal. Chacune de ces balises indique la signification de telle ou telle portion de texte dans le site. On parle d\'« hypertexte » en référence aux liens qui connectent les pages web entre elles. C\'est la mécanique originelle du « World Wide Web » que nous connaissons aujourd\'hui. En écrivant et publiant des pages web, vous devenez un acteur du Web dès que votre site est accessible en ligne.', 1, 1, '2020-07-15 12:44:22', 'html.jpg'),
+(1, 'Qu\'est-ce que HTML ?', 'HTML signifie « HyperText Markup Language » qu\'on peut traduire par « langage de balises pour l\'hypertexte ». Il est utilisé afin de créer et de représenter le contenu d\'une page web et sa structure. D\'autres technologies sont utilisées avec HTML pour décrire la présentation d\'une page (CSS) et/ou ses fonctionnalités interactives (JavaScript).\r\n\r\nHTML fonctionne grâce à des « balises » qui sont insérées au sein d\'un texte normal. Chacune de ces balises indique la signification de telle ou telle portion de texte dans le site. On parle d\'« hypertexte » en référence aux liens qui connectent les pages web entre elles. C\'est la mécanique originelle du « World Wide Web » que nous connaissons aujourd\'hui. En écrivant et publiant des pages web, vous devenez un acteur du Web dès que votre site est accessible en ligne.', 1, 1, '2020-07-15 14:27:13', 'html.jpg'),
 (3, 'Qu\'est-ce que PHP ?', 'PHP (officiellement, ce sigle est un acronyme récursif pour PHP Hypertext Preprocessor) est un langage de scripts généraliste et Open Source, spécialement conçu pour le développement d\'applications web. Il peut être intégré facilement au HTML.\r\nAu lieu d\'utiliser des tonnes de commandes afin d\'afficher du HTML (comme en C ou en Perl), les pages PHP contiennent des fragments HTML dont du code qui fait \"quelque chose\" (dans ce cas, il va afficher \"Bonjour, je suis un script PHP !\"). Le code PHP est inclus entre une balise de début <?php et une balise de fin ?> qui permettent au serveur web de passer en mode PHP.', 1, 3, '2020-07-15 12:46:34', 'php.jpg'),
 (4, 'Qu\'est-ce que JAVASCRIPT ?', 'JavaScript est un langage de programmation de scripts principalement employé dans les pages web interactives mais aussi pour les serveurs2 avec l\'utilisation (par exemple) de Node.js3. C\'est un langage orienté objet à prototype, c\'est-à-dire que les bases du langage et ses principales interfaces sont fournies par des objets qui ne sont pas des instances de classes, mais qui sont chacun équipés de constructeurs permettant de créer leurs propriétés, et notamment une propriété de prototypage qui permet de créer des objets héritiers personnalisés. En outre, les fonctions sont des objets de première classe. Le langage supporte le paradigme objet, impératif et fonctionnel. JavaScript est le langage possédant le plus large écosystème grâce à son gestionnaire de dépendances npm, avec environ 500 000 paquets en août 20174.', 1, 4, '2020-07-15 12:47:34', 'js.jpg'),
 (6, 'Pourquoi apprendre le CSS : 6 raisons', 'Les pages web se chargent plus rapidement et utilisent moins de bande passante\r\nLes feuilles de styles (téléchargée une seule fois puis stockée dans la mémoire cache) simplifies le code HTML ce qui permet de consommer moins de bande passante lors du chargement de la page.\r\n\r\n\r\nLe CSS est compatible avec tous les navigateurs\r\nLes sites web qui emploient correctement le CSS ont une apparence similaire quelque soit le navigateur utilisé.\r\n\r\n\r\nLe CSS peut etre utilisé pour créer des pages web faciles a imprimer\r\nLes images, les couleurs et les autres éléments difficiles a imprimer sont alors éliminés et les pages imprimées plus facilement.\r\n\r\n\r\nLe CSS permet à l\'utilisateur de personnaliser une page web\r\nAujourd\'hui, de nombreux sites web permettent à l\'utilisateur de changer la mise en page d\'un site sans modifier le contenu.\r\n\r\n\r\nLes feuilles de styles qui sont stockées en externe permettent à l\'utilisateur d\'effectuer les changements requis par eux-memes.\r\n\r\n\r\nLe CSS facilite le positionnement dans les moteurs de recherche\r\nle contenu est fourni en premier pour qu\'il soit plus facilement \"capturable\" par les spiders des moteurs.\r\n\r\n\r\nLe CSS rend également le code HTML plus \"propre\" facilitant le travail des robots d\'indexation.\r\n\r\n\r\nLe CSS facilite la portabilité du contenu\r\nEn employant le CSS, vous pouvez régler séparément les feuilles de style pour differents médias. Cela vous donne donc une plus grande souplesse dans la présentation de votre contenu.\r\n\r\n\r\nLe CSS vous permet de modifier les caractéristiques des éléments d\'un site web en fonction de la nécessité de la situation.', 1, 2, '2020-07-15 13:01:27', 'pcss.jpg'),
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(80) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `categories`
@@ -105,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `commentaires` (
   `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `id_article` (`id_article`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `commentaires`
@@ -118,7 +119,8 @@ INSERT INTO `commentaires` (`id`, `commentaire`, `id_article`, `id_utilisateur`,
 (5, 'Ah bravo !!!', 20, 1, '2020-07-15 13:49:45'),
 (6, 'Oui ben hein...', 20, 1, '2020-07-15 13:49:54'),
 (7, 'C\'est possible de faire une conversation avec un autre utilisateur que toi même ? ', 20, 1, '2020-07-15 13:50:22'),
-(8, 'Oui mais j\'ai la flemme de changer d\'utilisateur', 20, 1, '2020-07-15 13:50:58');
+(8, 'Oui mais j\'ai la flemme de changer d\'utilisateur', 20, 1, '2020-07-15 13:50:58'),
+(10, 'Oui moi je veux bien discuter avec toi ! ', 20, 4, '2020-07-15 14:21:22');
 
 -- --------------------------------------------------------
 
@@ -156,7 +158,7 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
   `email` varchar(255) NOT NULL,
   `id_droits` int(11) NOT NULL DEFAULT 1,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateurs`
@@ -165,11 +167,18 @@ CREATE TABLE IF NOT EXISTS `utilisateurs` (
 INSERT INTO `utilisateurs` (`id`, `login`, `password`, `email`, `id_droits`) VALUES
 (1, 'martin', '$2y$10$CHWCqKcH0iKKM/HiEc3yFOMmnCPaLxYMw/27tXl3HyxUSpEpkYn7e', 'martin@lol.lol', 1337),
 (2, 'celine', '$2y$10$8x.scjpzTYxKjf5yjbODIue6m44X8kwNYIJxp19wwsiyXlf.USSVO', 'lol@lol.lol', 1337),
-(3, 'modo', 'modo', 'modo@modo.modo', 42);
+(3, 'modo', 'modo', 'modo@modo.modo', 42),
+(4, 'mathilde', '$2y$10$9zzLpch2gjqfLsBAJ03bQOJEu2BDanijy2UNN4JXGrfS9crMmRN9K', 'mathilde@mathilde.fr', 1);
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `articles`
+--
+ALTER TABLE `articles`
+  ADD CONSTRAINT `sup_article` FOREIGN KEY (`id_categorie`) REFERENCES `categories` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `commentaires`

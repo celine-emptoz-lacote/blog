@@ -109,13 +109,13 @@
                                         else if($i == 1)
                                             {
                                                 ?>                         
-                                                    <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>"><?= $i?></a>                     
+                                                    <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>&par_page=<?= $par_page ?>"><?= $i?></a>                     
                                                 <?php
                                             }
                                         else if($i == $nb_pages_cat)
                                             {
                                                 ?>                         
-                                                    <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>"><?= $i?></a>                         
+                                                    <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>&par_page=<?= $par_page ?>"><?= $i?></a>                         
                                                 <?php
                                             }
                                         else
@@ -123,7 +123,7 @@
                                                 if($i == ($page - 1) || $i == ($page + 1))
                                                     {
                                                         ?>                         
-                                                            <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>"><?= $i?></a>                         
+                                                            <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>&par_page=<?= $par_page ?>"><?= $i?></a>                         
                                                         <?php
                                                     }   
                                                 if($i == ($page - 2) || $i == ($page + 2))                                         
@@ -247,13 +247,13 @@
                                         else if($i == 1)
                                             {
                                                 ?>                         
-                                                    <a href="articles.php?start=<?= $i ?>"><?= $i?></a>                        
+                                                    <a href="articles.php?start=<?= $i ?>&par_page=<?= $par_page ?>"><?= $i?></a>                        
                                                 <?php
                                             }
                                         else if($i == $nb_pages)
                                             {
                                                 ?>                         
-                                                    <a href="articles.php?start=<?= $i ?>"><?= $i?></a>                        
+                                                    <a href="articles.php?start=<?= $i ?>&par_page=<?= $par_page ?>"><?= $i?></a>                        
                                                 <?php
                                             }
                                         else
@@ -261,15 +261,14 @@
                                                 if($i == ($page - 1) || $i == ($page + 1))
                                                     {
                                                         ?>                         
-                                                            <a href="articles.php?start=<?= $i ?>"><?= $i?></a>                         
+                                                            <a href="articles.php?start=<?= $i ?>&par_page=<?= $par_page ?>"><?= $i?></a>                         
                                                         <?php
                                                     }   
                                                 if($i == ($page - 2) || $i == ($page + 2))                                         
                                                     {
                                                         echo "&nbsp...&nbsp";
                                                     }
-                                            }
-                                                    
+                                            }                                                    
                                     }     
                                 ?>
                                 </section>
