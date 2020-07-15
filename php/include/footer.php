@@ -46,15 +46,28 @@
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Divers</h5>
 
         <ul class="list-unstyled">
+        <?php if (isset($_SESSION['user']->id)) :?>
+          <?php if ($_SESSION['user']->id_droits == 42 || $_SESSION['user']->id_droits == 1337 ) : ?>
+              <li>
+                <a href="creer-article.php" >Créer un article</a>
+              </li>
+          <?php endif ;?>
+          <?php if ( $_SESSION['user']->id_droits == 1337 ) : ?>
+              <li>
+                <a href="admin.php" >Espace administrateur</a>
+              </li>
+          <?php endif ;?>
+          <li>
+            <a href="profil.php" >Mon compte</a>
+          </li>
+        <?php else :?>
           <li>
             <a href="connexion.php" >Connexion</a>
           </li>
           <li>
             <a href="inscription.php" >Inscription</a>
           </li>
-          <li>
-            <a href="profil.php" >Mon compte</a>
-          </li>
+        <?php endif ;?>
         </ul>
 
       </div>
