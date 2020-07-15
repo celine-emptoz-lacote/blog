@@ -25,28 +25,36 @@
         <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-50 m-auto' >".$_SESSION['erreur']."</p>" ; }?>
 
         <h1>Formulaire de Connexion</h1>
-        <form action="" method="POST">
-            <label for="login" name="login">Login :</label>
-            <input type="text" name="login" required>
+        <section class="container mb-5 mt-5 d-flex justify-content-center">
+            <form action="" method="POST">
+                <section class="form-group">
+                    <label for="login" name="login">Login :</label>
+                    <input type="text" name="login" required>
+                </section>
 
-            <label for="password">Mot de passe :</label>
-            <input type="password" name="password" required>
+               <section class="form-group">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" name="password" required>
+               </section>
 
-            <input type="submit" name="valid_co" value="Connexion">
+                <section>
+                    <input type="submit" name="valid_co" value="Connexion">
+                </section>
 
-            <?php
-                if(!empty($user->msg_error))
-                    {
-            ?>
-                        <p class="msg_error">
-            <?php
-                        echo $user->msg_error;
-            ?>
-                        </p>
-            <?php
-                    }
-            ?>
-        </form>
+                <?php
+                    if(!empty($user->msg_error))
+                        {
+                ?>
+                            <p class="msg_error">
+                <?php
+                            echo $user->msg_error;
+                ?>
+                            </p>
+                <?php
+                        }
+                ?>
+            </form>
+        </section>
     </main>
 
     <?php include 'php/include/footer.php' ?>
