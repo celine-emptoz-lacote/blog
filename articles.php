@@ -19,7 +19,7 @@
 <body>
     <header><?php include 'php/include/header.php' ?></header>
 
-    <main id="main_articles">
+    <main id="main_articles">    
         <?php              
             include 'php/traitement/php_articles.php'; 
             include 'php/include/select_page.php';

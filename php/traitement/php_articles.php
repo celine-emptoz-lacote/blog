@@ -81,39 +81,69 @@
                     if($nb_articles_cat >$par_page)
                         {                       
                             ?>
-                            <section class="pagination_bis">
-                            <?php
-                            if($page > 1)
-                                {
-                                    ?>
-                                    <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $page - 1 ?>" class="btn btn-primary">&laquo; Page précédente</a>
-                                    <?php
-                                }
-                            if($page < $nb_pages_cat)
-                                {
-                                    ?>
-                                    <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $page + 1 ?>&par_page=<?= $par_page ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
-                                    <?php
-                                }
+                             <section class="pagination"> 
+                                <?php
+                                if($page > 1)
+                                    {
+                                        ?>
+                                        <a href="articles.php?start=<?= $page - 1 ?>&categorie=<?= $element['id_categorie'] ?>&par_page=<?= $par_page ?>" class="btn btn-primary">&laquo; Page précédente</a>
+                                        <?php
+                                    }    
+                                else
+                                    {
+                                        ?>
+                                        <p class="precedent"></p>
+                                        <?php
+                                    }        
+                                ?>
+                                <section class="pagination_chiffre">
+                                <?php                    
+                                for($i=1; $i<=$nb_pages_cat; $i++)//Crée les numéros pour la pagination en fonction du nombre de pages
+                                    {
+                                        if($i==$page)
+                                            {
+                                                ?>
+                                                <span class="bg-primary text-white p-1"><?= $i ?></span>
+                                                <?php                                                
+                                            }  
+                                        else if($i == 1)
+                                            {
+                                                ?>                         
+                                                    <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>"><?= $i?></a>                     
+                                                <?php
+                                            }
+                                        else if($i == $nb_pages_cat)
+                                            {
+                                                ?>                         
+                                                    <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>"><?= $i?></a>                         
+                                                <?php
+                                            }
+                                        else
+                                            {                                           
+                                                if($i == ($page - 1) || $i == ($page + 1))
+                                                    {
+                                                        ?>                         
+                                                            <a href="articles.php?start=<?= $i ?>&categorie=<?= $element['id_categorie'] ?>"><?= $i?></a>                         
+                                                        <?php
+                                                    }   
+                                                if($i == ($page - 2) || $i == ($page + 2))                                         
+                                                    {
+                                                        echo "&nbsp...&nbsp";
+                                                    }
+                                            }
+                                                    
+                                    }     
+                                ?>
+                                </section>
+                                <?php
+                                if($page < $nb_pages_cat)
+                                    {
+                                        ?>
+                                        <a href="articles.php?&start=<?= $page + 1 ?>&categorie=<?= $element['id_categorie'] ?>&par_page=<?= $par_page ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
+                                        <?php
+                                    }
                             ?>
-                            </section>
-                            <section class="pagination">  
-                            <?php
-                            for($i=1; $i<=$nb_pages_cat; $i++)
-                                {
-                                    if($i==$page)
-                                        {
-                                            echo "$i /";
-                                        }
-                                    else
-                                        {                                        
-                                            ?>                         
-                                                <a href="articles.php?categorie=<?= $element['id_categorie']?>&start=<?= $i ?>&par_page=<?= $par_page ?>"><?= $i?></a> /                        
-                                            <?php
-                                        }                    
-                                }        
-                            ?>
-                            </section>  
+                            </section> 
                             <?php   
                         }                         
                 }                                                                          
@@ -185,41 +215,71 @@
                             </section>
                             <?php
                         }               
-                                //Pagination pour la partie articles globale
+                                //Affichage de la pagination pour la partie articles globale
                     if($nb_articles>$par_page)
                         {
-                            ?>
-                            <section class="pagination_bis">
+                            ?>                                                       
+                            <section class="pagination"> 
                                 <?php
                                 if($page > 1)
                                     {
                                         ?>
                                         <a href="articles.php?start=<?= $page - 1 ?>&par_page=<?= $par_page ?>" class="btn btn-primary">&laquo; Page précédente</a>
                                         <?php
-                                    }
+                                    }    
+                                else
+                                    {
+                                        ?>
+                                        <p class="precedent"></p>
+                                        <?php
+                                    }        
+                                ?>
+                                <section class="pagination_chiffre">
+                                <?php                    
+                                for($i=1; $i<=$nb_pages; $i++)//Crée les numéros pour la pagination en fonction du nombre de pages
+                                    {
+                                        if($i==$page)
+                                            {
+                                                ?>
+                                                <span class="bg-primary text-white p-1"><?= $i ?></span>
+                                                <?php
+                                            }  
+                                        else if($i == 1)
+                                            {
+                                                ?>                         
+                                                    <a href="articles.php?start=<?= $i ?>"><?= $i?></a>                        
+                                                <?php
+                                            }
+                                        else if($i == $nb_pages)
+                                            {
+                                                ?>                         
+                                                    <a href="articles.php?start=<?= $i ?>"><?= $i?></a>                        
+                                                <?php
+                                            }
+                                        else
+                                            {                                           
+                                                if($i == ($page - 1) || $i == ($page + 1))
+                                                    {
+                                                        ?>                         
+                                                            <a href="articles.php?start=<?= $i ?>"><?= $i?></a>                         
+                                                        <?php
+                                                    }   
+                                                if($i == ($page - 2) || $i == ($page + 2))                                         
+                                                    {
+                                                        echo "&nbsp...&nbsp";
+                                                    }
+                                            }
+                                                    
+                                    }     
+                                ?>
+                                </section>
+                                <?php
                                 if($page < $nb_pages)
                                     {
                                         ?>
                                         <a href="articles.php?&start=<?= $page + 1 ?>&par_page=<?= $par_page ?>" class="btn btn-primary suivant">Page suivante &raquo;</a>
                                         <?php
                                     }
-                                ?>
-                            </section>
-                            <section class="pagination"> 
-                                <?php
-                            for($i=1; $i<=$nb_pages; $i++)//Crée les numéros pour la pagination en fonction du nombre de pages
-                                {
-                                    if($i==$page)
-                                        {
-                                            echo "$i /";
-                                        }
-                                    else
-                                        {
-                                            ?>                         
-                                                <a href="articles.php?start=<?= $i ?>"><?= $i?></a> /                        
-                                            <?php
-                                        }                    
-                                }     
                             ?>
                             </section> 
                             <?php

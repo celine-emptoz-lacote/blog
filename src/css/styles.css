@@ -138,21 +138,27 @@ h3 {
     }
 .pagination
     {
-        display: none;
-        /* flex-direction: row;
-        justify-content: center;
-        margin-bottom: 5vh; */
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between; 
+        align-items: center;
+        width: 90%;         
+        margin-bottom: 5vh;
     }
-.pagination_bis
+.pagination_chiffre
     {
         display: flex;
-        justify-content: space-between;    
-        width: 90%;    
-        margin-bottom: 3vh;
+        justify-content: center;
+        align-items: center;
+        width: 100vw;        
     }
 .suivant
     {
         margin-left: auto;
+    }
+.precedent
+    {
+        width: 20vw;
     }
 .par_page
     {
@@ -286,3 +292,15 @@ thead {
    
 }
 /*****************/
+/* DEBUT PAGE FORMULAIRE CONNEX INSC PROFIL */
+.main_form
+    {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+.main_form h1
+    {
+        width: fit-content;
+    }

@@ -20,39 +20,26 @@
 <body>
     <header><?php include 'php/include/header.php';?></header>
 
-    <main>
-
-        <?php if (isset($_SESSION['erreur'])) { echo "<p class='alert alert-danger w-50 m-auto' >".$_SESSION['erreur']."</p>" ; }?>
-
+    <main class="main_form">        
         <h1>Formulaire de Connexion</h1>
+
+        <?php if(!empty($user->msg_error)) { echo '<p class="alert alert-danger w-75 p-3 m-auto text-center">'.$user->msg_error.'</p>' ; }?></p>        
+
         <section class="container mb-5 mt-5 d-flex justify-content-center">
             <form action="" method="POST">
                 <section class="form-group">
-                    <label for="login" name="login">Login :</label>
-                    <input type="text" name="login" required>
+                    <label for="login" name="login" class="d-flex justify-content-center">Login :</label>
+                    <input type="text" name="login" class="form-control text-center" required>
                 </section>
 
                <section class="form-group">
-                    <label for="password">Mot de passe :</label>
-                    <input type="password" name="password" required>
+                    <label for="password" class="d-flex justify-content-center">Mot de passe :</label>
+                    <input type="password" name="password" class="form-control text-center" required>
                </section>
 
-                <section>
-                    <input type="submit" name="valid_co" value="Connexion">
-                </section>
-
-                <?php
-                    if(!empty($user->msg_error))
-                        {
-                ?>
-                            <p class="msg_error">
-                <?php
-                            echo $user->msg_error;
-                ?>
-                            </p>
-                <?php
-                        }
-                ?>
+                <section class="d-flex justify-content-center">
+                    <input type="submit" name="valid_co" value="Connexion" class="btn btn-primary">
+                </section>               
             </form>
         </section>
     </main>
@@ -61,4 +48,3 @@
 </body>
 </html>
 
-<?php unset($_SESSION['erreur']) ?>
