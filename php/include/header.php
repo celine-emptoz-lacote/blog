@@ -47,7 +47,7 @@
           Les catégories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="articles.php">Tout les articles</a>
+          <a class="dropdown-item" href="articles.php">Tous les articles</a>
           <?php if (isset($categories))  :?>
               <?php for ($i = 0 ; $i<COUNT($categories) ; $i++) :?>
                 <a class="dropdown-item" href="articles.php?categorie=<?= $categories[$i]['id']?>&p=1"><?= $categories[$i]['nom'] ?></a>

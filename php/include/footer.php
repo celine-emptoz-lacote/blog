@@ -25,6 +25,7 @@
         <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Les catégories</h5>
 
         <ul class="list-unstyled">
+            <li><a href="articles.php">Tous les articles</a></li>
             <?php if (isset($categories)) :?>
                 <?php for ($i=0 ; $i<COUNT($categories); $i++) : ?>
                     <li>
