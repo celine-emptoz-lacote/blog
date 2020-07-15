@@ -104,7 +104,7 @@ else {
                             <td><?= $resultat_users[$i]['email'] ?></td>
                             <td><?= $resultat_users[$i]['nom'] ?></td>
                             <td><a class="icon-edit" href="modification_user.php?id=<?=$resultat_users[$i][0] ?>" title="Modifier"></a> </td>
-                            <td><a class="icon-trash" href="php/traitement/supprimer_user.php?id=<?= $resultat_users[$i][0] ?>" title="supprimer"></a></td>
+                            <td><button><a class="icon-trash" href="php/traitement/supprimer_user.php?id=<?= $resultat_users[$i][0]?>" title="supprimer" onclick="return confirm('Supprimer : <?=$resultat_users[$i]['login'];?> ?')"></a></button></td>                            
                         </tr>
                         <?php endfor ;?>
                     </tbody>
@@ -138,7 +138,8 @@ else {
                         <td><img src="php/traitement/upload/<?= $resultat_recuperation_articles[$i]['image'] ?>" alt="Image"></td>
                         <td><?= $resultat_recuperation_articles[$i]['nom'] ?></td>
                         <td><a class="icon-edit" href="modification_article.php?id=<?= $resultat_recuperation_articles[$i][0]?>" title="Modifier"></a> </td>
-                        <td><a class="icon-trash" href="php/traitement/supp_article.php?id=<?= $resultat_recuperation_articles[$i][0]?>" title="supprimer"></a> </td>
+                        <td><button><a class="icon-trash" href="php/traitement/supp_article.php?id=<?= $resultat_recuperation_articles[$i][0]?>" title="supprimer" onclick="return confirm('Supprimer : <?=$resultat_recuperation_articles[$i]['titre'];?> ?')"></a></button></td>
+                        
                     </tr>
                     <?php endfor ;?>
                 </tbody>
@@ -181,7 +182,7 @@ else {
                         <tr>
                             <td><?= $categories[$i]['nom'] ?></td>
                             <td><a class="icon-edit" href="modification_categorie.php?id=<?= $categories[$i]['id'] ?>" title="Modifier"></a></td>
-                            <td><a class="icon-trash" href="php/traitement/supprimer_categorie.php?id=<?= $categories[$i]['id'] ?>" title="supprimer"></a></td>
+                            <td><button><a class="icon-trash" href="php/traitement/supprimer_categorie.php?id=<?= $categories[$i]['id'] ?>" title="supprimer" onclick="return confirm('Supprimer : <?=$categories[$i]['nom'];?> ?')"></a></button></td>                            
                         </tr>
                         <?php endfor ;?>
                     </tbody>

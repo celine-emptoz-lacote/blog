@@ -120,7 +120,7 @@
                 <?php else :?>
                     <a  href="article.php?id=<?= $_GET['id']?>&p=<?=$i?>"><?= $i ?></a>
                 <?php endif ;?>
-                <?php $com = $com + 5 ; ?>
+                <?php $com = $com + 5 ; ?>                
             <?php endfor ;?>
             </div>
       
